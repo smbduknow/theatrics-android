@@ -5,8 +5,6 @@ import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.Toolbar
-import android.view.Menu
-import android.view.MenuItem
 
 class MainActivity : AppCompatActivity() {
 
@@ -26,9 +24,8 @@ class MainActivity : AppCompatActivity() {
         if (cleanStack) {
             clearBackStack()
         }
-        ft.setCustomAnimations(
-                R.anim.abc_fade_in, R.anim.abc_fade_out, R.anim.abc_popup_enter, R.anim.abc_popup_exit)
-        ft.replace(R.id.activity_base_content, f)
+        ft.setCustomAnimations(R.anim.abc_fade_in, R.anim.abc_fade_out, R.anim.abc_popup_enter, R.anim.abc_popup_exit)
+        ft.replace(R.id.content_main, f)
         ft.addToBackStack(null)
         ft.commit()
     }
