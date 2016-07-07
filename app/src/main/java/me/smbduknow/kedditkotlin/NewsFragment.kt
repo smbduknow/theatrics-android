@@ -8,14 +8,15 @@ import android.view.View
 import android.view.ViewGroup
 import kotlinx.android.synthetic.main.fragment_news.*
 import me.smbduknow.kedditkotlin.commons.inflate
-import me.smbduknow.kedditkotlin.model.RedditNews
+import rx.android.schedulers.AndroidSchedulers
+import rx.schedulers.Schedulers
 
 
 class NewsFragment : Fragment() {
 
-    private val newsList by lazy {
-        news_list
-    }
+    private val newsList by lazy { news_list }
+
+    private val newsManager by lazy { NewsManager() }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return container?.inflate(R.layout.fragment_news)
@@ -30,18 +31,11 @@ class NewsFragment : Fragment() {
         newsList.adapter = NewsAdapter()
 
         if (savedInstanceState == null) {
-            val news = mutableListOf<RedditNews>()
-            for (i in 1..10) {
-                news.add(RedditNews(
-                        "author$i",
-                        "Title $i",
-                        i, // number of comments
-                        1457207701L - i * 200, // time
-                        "http://lorempixel.com/200/200/technics/$i", // image url
-                        "url"
-                ))
-            }
-            (newsList.adapter as NewsAdapter).addNews(news)
+            newsManager.getNews()
+                    .subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribe { news -> (newsList.adapter as NewsAdapter).addNews(news) }
+
         }
     }
 }
