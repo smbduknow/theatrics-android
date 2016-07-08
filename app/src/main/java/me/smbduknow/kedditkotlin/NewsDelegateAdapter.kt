@@ -2,7 +2,6 @@ package me.smbduknow.kedditkotlin
 
 import android.support.v7.widget.RecyclerView
 import android.view.ViewGroup
-import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.item_news.view.*
 import me.smbduknow.kedditkotlin.commons.inflate
 import me.smbduknow.kedditkotlin.commons.loadImg
@@ -23,7 +22,6 @@ class NewsDelegateAdapter : ViewModelDelegateAdapter {
             parent.inflate(R.layout.item_news)) {
 
         fun bind(item: RedditNews) = with(itemView) {
-            Picasso.with(itemView.context).load(item.thumbnail).into(img_thumbnail)
             img_thumbnail.loadImg(item.thumbnail)
             description.text = item.title
             author.text = item.author
