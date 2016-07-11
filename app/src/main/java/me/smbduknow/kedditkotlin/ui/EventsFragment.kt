@@ -10,6 +10,7 @@ import kotlinx.android.synthetic.main.fragment_news.*
 import me.smbduknow.kedditkotlin.R
 import me.smbduknow.kedditkotlin.ui.commons.InfiniteScrollListener
 import me.smbduknow.kedditkotlin.ui.commons.inflate
+import me.smbduknow.kedditkotlin.ui.model.UiEvent
 import rx.android.schedulers.AndroidSchedulers
 import rx.schedulers.Schedulers
 
@@ -27,13 +28,15 @@ class EventsFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
-        eventsList.setHasFixedSize(true)
         val linearLayout = LinearLayoutManager(context)
-        eventsList.layoutManager = linearLayout
-        eventsList.clearOnScrollListeners()
-        eventsList.addOnScrollListener(InfiniteScrollListener({ requestNews() }, linearLayout))
 
-        eventsList.adapter = EventsAdapter()
+        eventsList.apply {
+            setHasFixedSize(true)
+            layoutManager = linearLayout
+            clearOnScrollListeners()
+            addOnScrollListener(InfiniteScrollListener(linearLayout, {requestNews()} ))
+            adapter = EventsAdapter()
+        }
 
         if (savedInstanceState == null) {
             requestNews()
@@ -44,6 +47,10 @@ class EventsFragment : Fragment() {
         eventsManager.getEvents()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
+                .map { it.items.map { UiEvent(
+                            it.title,
+                            it.type,
+                            it.description ) } }
                 .subscribe { news -> (eventsList.adapter as EventsAdapter).addNews(news) }
     }
 }

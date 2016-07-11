@@ -5,7 +5,6 @@ import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.Toolbar
-import me.smbduknow.kedditkotlin.ui.NewsFragment
 import me.smbduknow.kedditkotlin.R
 
 class MainActivity : AppCompatActivity() {
@@ -17,7 +16,7 @@ class MainActivity : AppCompatActivity() {
         setSupportActionBar(toolbar)
 
         if (savedInstanceState == null) {
-            changeFragment(NewsFragment())
+            changeFragment(EventsFragment())
         }
     }
 
