@@ -1,4 +1,4 @@
-package me.smbduknow.kedditkotlin
+package me.smbduknow.kedditkotlin.ui.commons.adapter
 
 import android.support.v7.widget.RecyclerView
 import android.view.ViewGroup

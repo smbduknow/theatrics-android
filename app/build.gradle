@@ -36,20 +36,34 @@ android {
 }
 
 dependencies {
+
+    final okhttpVersion = '3.2.0'
+    final retrofitVersion = '2.0.2'
+    final picassoVersion = '2.5.2'
+
     testCompile 'junit:junit:4.12'
 
     compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
 
-    compile 'com.android.support:appcompat-v7:23.4.0'
-    compile 'com.android.support:design:23.4.0'
+    compile "com.android.support:appcompat-v7:23.4.0"
+    compile "com.android.support:design:23.4.0"
 
     compile "com.squareup.retrofit2:retrofit:2.0.0"
     compile "com.squareup.retrofit2:converter-moshi:2.0.0"
-    compile 'com.squareup.picasso:picasso:2.5.2'
+
+    //io (squareup)
+    compile "com.squareup.okhttp3:okhttp:$okhttpVersion"
+    compile "com.squareup.okhttp3:logging-interceptor:$okhttpVersion"
+
+    compile ("com.squareup.retrofit2:retrofit:$retrofitVersion") { exclude module: 'okhttp' }
+    compile "com.squareup.retrofit2:converter-moshi:$retrofitVersion"
+    compile "com.squareup.retrofit2:adapter-rxjava:$retrofitVersion"
+
+    compile "com.squareup.picasso:picasso:$picassoVersion"
 
     //rx
-    compile 'io.reactivex:rxjava:1.1.6'
-    compile 'io.reactivex:rxandroid:1.2.1'
+    compile "io.reactivex:rxjava:1.1.6"
+    compile "io.reactivex:rxandroid:1.2.1"
 }
 repositories {
     mavenCentral()

@@ -1,6 +1,6 @@
 @file:JvmName("ExtensionsUtils")
 
-package me.smbduknow.kedditkotlin.commons
+package me.smbduknow.kedditkotlin.ui.commons
 
 import android.text.TextUtils
 import android.view.LayoutInflater

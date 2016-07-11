@@ -1,12 +1,16 @@
-package me.smbduknow.kedditkotlin
+package me.smbduknow.kedditkotlin.ui
 
 import android.support.v4.util.SparseArrayCompat
 import android.support.v7.widget.RecyclerView
 import android.view.ViewGroup
-import me.smbduknow.kedditkotlin.model.RedditNews
+import me.smbduknow.kedditkotlin.ui.commons.adapter.AdapterConst
+import me.smbduknow.kedditkotlin.ui.commons.adapter.LoadingDelegateAdapter
+import me.smbduknow.kedditkotlin.ui.commons.adapter.ViewModel
+import me.smbduknow.kedditkotlin.ui.commons.adapter.ViewModelDelegateAdapter
+import me.smbduknow.kedditkotlin.ui.model.UiEvent
 import java.util.*
 
-class NewsAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class EventsAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     private var items: ArrayList<ViewModel>
     private var delegateAdapters = SparseArrayCompat<ViewModelDelegateAdapter>()
@@ -17,14 +21,14 @@ class NewsAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     init {
         delegateAdapters.put(AdapterConst.LOADING, LoadingDelegateAdapter())
-        delegateAdapters.put(AdapterConst.ITEM, NewsDelegateAdapter())
+        delegateAdapters.put(AdapterConst.ITEM_EVENT, EventsDelegateAdapter())
         items = ArrayList()
         items.add(loadingItem)
     }
 
-    override fun getItemCount(): Int {
-        return items.size
-    }
+    override fun getItemCount() = items.size
+
+    override fun getItemViewType(position: Int) = items.get(position).getViewType()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         return delegateAdapters.get(viewType).onCreateViewHolder(parent)
@@ -34,11 +38,9 @@ class NewsAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
         delegateAdapters.get(getItemViewType(position)).onBindViewHolder(holder, this.items[position])
     }
 
-    override fun getItemViewType(position: Int): Int {
-        return this.items.get(position).getViewType()
-    }
 
-    fun addNews(news: List<RedditNews>) {
+
+    fun addNews(news: List<UiEvent>) {
         // first remove loading and notify
         val initPosition = items.size - 1
         items.removeAt(initPosition)
@@ -50,7 +52,7 @@ class NewsAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
         notifyItemRangeChanged(initPosition, items.size + 1 /* plus loading item */)
     }
 
-    fun clearAndAddNews(news: List<RedditNews>) {
+    fun clearAndAddNews(news: List<UiEvent>) {
         items.clear()
         notifyItemRangeRemoved(0, getLastPosition())
 
@@ -59,10 +61,10 @@ class NewsAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
         notifyItemRangeInserted(0, items.size)
     }
 
-    fun getNews(): List<RedditNews> {
+    fun getNews(): List<UiEvent> {
         return items
-                .filter { it.getViewType() == AdapterConst.ITEM }
-                .map { it as RedditNews }
+                .filter { it.getViewType() == AdapterConst.ITEM_EVENT }
+                .map { it as UiEvent }
     }
 
     private fun getLastPosition() = if (items.lastIndex == -1) 0 else items.lastIndex
