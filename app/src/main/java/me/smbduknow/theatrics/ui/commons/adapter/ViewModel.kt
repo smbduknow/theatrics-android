@@ -1,4 +1,4 @@
-package me.smbduknow.kedditkotlin.ui.commons.adapter
+package me.smbduknow.theatrics.ui.commons.adapter
 
 interface ViewModel {
 

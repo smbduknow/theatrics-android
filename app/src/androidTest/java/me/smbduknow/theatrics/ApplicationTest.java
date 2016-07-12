@@ -1,4 +1,4 @@
-package me.smbduknow.kedditkotlin;
+package me.smbduknow.theatrics;
 
 import android.app.Application;
 import android.test.ApplicationTestCase;

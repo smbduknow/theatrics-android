@@ -1,4 +1,4 @@
-package me.smbduknow.kedditkotlin.ui.commons
+package me.smbduknow.theatrics.ui.commons
 
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView

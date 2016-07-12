@@ -1,7 +1,7 @@
-package me.smbduknow.kedditkotlin.api
+package me.smbduknow.theatrics.api
 
-import me.smbduknow.kedditkotlin.api.model.ApiFeedItem
-import me.smbduknow.kedditkotlin.api.model.ApiListResponse
+import me.smbduknow.theatrics.api.model.ApiFeedItem
+import me.smbduknow.theatrics.api.model.ApiListResponse
 import retrofit2.http.GET
 import retrofit2.http.Path
 import retrofit2.http.Query
@@ -11,11 +11,15 @@ interface TheatricsApi {
 
 
     @GET("/api/v1/events/")
-    fun getEvents() : Observable<ApiListResponse<ApiFeedItem>>
+    fun getEvents(
+            @Query("page_size") limit: Int,
+            @Query("page") offset: Int
+    ) : Observable<ApiListResponse<ApiFeedItem>>
 
     @GET("/api/v1/events/{id}/")
     fun getEvent(
-            @Path("id") id: Int) : Observable<Object>
+            @Path("id") id: Int
+    ) : Observable<Object>
 
 
 //    @GET("/api/v1/places/")

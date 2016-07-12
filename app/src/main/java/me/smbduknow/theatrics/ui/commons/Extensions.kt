@@ -1,6 +1,6 @@
 @file:JvmName("ExtensionsUtils")
 
-package me.smbduknow.kedditkotlin.ui.commons
+package me.smbduknow.theatrics.ui.commons
 
 import android.text.TextUtils
 import android.view.LayoutInflater
@@ -8,7 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import com.squareup.picasso.Picasso
-import me.smbduknow.kedditkotlin.R
+import me.smbduknow.theatrics.R
 
 fun ViewGroup.inflate(layoutId: Int, attachToRoot: Boolean = false): View {
     return LayoutInflater.from(context).inflate(layoutId, this, attachToRoot)

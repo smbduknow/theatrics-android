@@ -1,11 +1,11 @@
-package me.smbduknow.kedditkotlin.ui
+package me.smbduknow.theatrics.ui
 
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.Toolbar
-import me.smbduknow.kedditkotlin.R
+import me.smbduknow.theatrics.R
 
 class MainActivity : AppCompatActivity() {
 

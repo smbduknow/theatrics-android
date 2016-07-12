@@ -1,13 +1,13 @@
-package me.smbduknow.kedditkotlin.ui
+package me.smbduknow.theatrics.ui
 
 import android.support.v4.util.SparseArrayCompat
 import android.support.v7.widget.RecyclerView
 import android.view.ViewGroup
-import me.smbduknow.kedditkotlin.ui.commons.adapter.AdapterConst
-import me.smbduknow.kedditkotlin.ui.commons.adapter.LoadingDelegateAdapter
-import me.smbduknow.kedditkotlin.ui.commons.adapter.ViewModel
-import me.smbduknow.kedditkotlin.ui.commons.adapter.ViewModelDelegateAdapter
-import me.smbduknow.kedditkotlin.ui.model.UiEvent
+import me.smbduknow.theatrics.ui.commons.adapter.AdapterConst
+import me.smbduknow.theatrics.ui.commons.adapter.LoadingDelegateAdapter
+import me.smbduknow.theatrics.ui.commons.adapter.ViewModel
+import me.smbduknow.theatrics.ui.commons.adapter.ViewModelDelegateAdapter
+import me.smbduknow.theatrics.ui.model.UiEvent
 import java.util.*
 
 class EventsAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {

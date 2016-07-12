@@ -1,4 +1,4 @@
-package me.smbduknow.kedditkotlin.api.model
+package me.smbduknow.theatrics.api.model
 
 import com.squareup.moshi.Json
 

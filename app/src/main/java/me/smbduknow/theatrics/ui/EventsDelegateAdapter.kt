@@ -1,13 +1,14 @@
-package me.smbduknow.kedditkotlin.ui
+package me.smbduknow.theatrics.ui
 
 import android.support.v7.widget.RecyclerView
+import android.text.Html
 import android.view.ViewGroup
 import kotlinx.android.synthetic.main.item_news.view.*
-import me.smbduknow.kedditkotlin.R
-import me.smbduknow.kedditkotlin.ui.commons.adapter.ViewModel
-import me.smbduknow.kedditkotlin.ui.commons.adapter.ViewModelDelegateAdapter
-import me.smbduknow.kedditkotlin.ui.commons.inflate
-import me.smbduknow.kedditkotlin.ui.model.UiEvent
+import me.smbduknow.theatrics.R
+import me.smbduknow.theatrics.ui.commons.adapter.ViewModel
+import me.smbduknow.theatrics.ui.commons.adapter.ViewModelDelegateAdapter
+import me.smbduknow.theatrics.ui.commons.inflate
+import me.smbduknow.theatrics.ui.model.UiEvent
 
 class EventsDelegateAdapter : ViewModelDelegateAdapter {
 
@@ -22,8 +23,8 @@ class EventsDelegateAdapter : ViewModelDelegateAdapter {
 
     class ViewHolder(parent: ViewGroup) : RecyclerView.ViewHolder(parent.inflate(R.layout.item_news)) {
         fun bind(item: UiEvent) = with(itemView) {
-            title.text = item.title
-            description.text = item.description
+            title.text = item.title.capitalize()
+            description.text = Html.fromHtml(item.description.trim().capitalize())
         }
     }
 }

@@ -25,6 +25,8 @@
         android:layout_below="@+id/title"
         android:textColor="#343434"
         android:textSize="10sp"
+        android:maxLines="3"
+        android:ellipsize="end"
         tools:ignore="SmallSp"
         tools:text="Author 123" />
 

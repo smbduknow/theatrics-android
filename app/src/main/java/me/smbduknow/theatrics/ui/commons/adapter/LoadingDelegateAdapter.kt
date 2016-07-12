@@ -1,9 +1,9 @@
-package me.smbduknow.kedditkotlin.ui.commons.adapter
+package me.smbduknow.theatrics.ui.commons.adapter
 
 import android.support.v7.widget.RecyclerView
 import android.view.ViewGroup
-import me.smbduknow.kedditkotlin.R
-import me.smbduknow.kedditkotlin.ui.commons.inflate
+import me.smbduknow.theatrics.R
+import me.smbduknow.theatrics.ui.commons.inflate
 
 class LoadingDelegateAdapter : ViewModelDelegateAdapter {
 

@@ -1,7 +1,7 @@
-package me.smbduknow.kedditkotlin.ui.model
+package me.smbduknow.theatrics.ui.model
 
-import me.smbduknow.kedditkotlin.ui.commons.adapter.AdapterConst
-import me.smbduknow.kedditkotlin.ui.commons.adapter.ViewModel
+import me.smbduknow.theatrics.ui.commons.adapter.AdapterConst
+import me.smbduknow.theatrics.ui.commons.adapter.ViewModel
 import java.io.Serializable
 
 data class UiEvent(
