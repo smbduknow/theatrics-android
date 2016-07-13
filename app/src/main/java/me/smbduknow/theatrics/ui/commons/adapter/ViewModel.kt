@@ -1,6 +1,8 @@
 package me.smbduknow.theatrics.ui.commons.adapter
 
-interface ViewModel {
+import java.io.Serializable
+
+interface ViewModel : Serializable {
 
     fun getViewType(): Int
 

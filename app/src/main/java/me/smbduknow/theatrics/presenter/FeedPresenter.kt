@@ -9,9 +9,12 @@ import me.smbduknow.theatrics.ui.model.UiEvent
 import rx.android.schedulers.AndroidSchedulers
 import rx.schedulers.Schedulers
 
-class FeedPresenter(private val view: FeedMvpView) : FeedMvpPresenter {
+class FeedPresenter(
+        private val view: FeedMvpView,
+        private val state: FeedState
+) : FeedMvpPresenter {
 
-    override fun requestFeed(limit: Int, offset: Int) {
+    override fun requestNext(limit: Int, offset: Int) {
         if(offset == 0) view.showLoader()
         ApiFactory.getApi().getEvents(limit, offset+1)
                 .subscribeOn(Schedulers.io())
@@ -25,9 +28,9 @@ class FeedPresenter(private val view: FeedMvpView) : FeedMvpPresenter {
     private fun handleResponse(response: ApiListResponse<ApiFeedItem>) {
         view.addItems(response.items.map {
             UiEvent(
-                it.title,
-                it.type,
-                it.description )
+                    it.title,
+                    it.type,
+                    it.description )
         })
         view.showFeed()
     }

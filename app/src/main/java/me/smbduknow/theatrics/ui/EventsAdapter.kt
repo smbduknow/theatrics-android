@@ -61,10 +61,11 @@ class EventsAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
         notifyItemRangeInserted(0, items.size)
     }
 
-    fun getNews(): List<UiEvent> {
-        return items
+    fun getNews(): ArrayList<UiEvent> {
+        return  items
                 .filter { it.getViewType() == AdapterConst.ITEM_EVENT }
                 .map { it as UiEvent }
+                as ArrayList<UiEvent>
     }
 
     private fun getLastPosition() = if (items.lastIndex == -1) 0 else items.lastIndex

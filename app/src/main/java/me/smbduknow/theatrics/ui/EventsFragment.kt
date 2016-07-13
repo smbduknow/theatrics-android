@@ -1,6 +1,8 @@
 package me.smbduknow.theatrics.ui
 
 import android.os.Bundle
+import android.os.Parcel
+import android.support.design.widget.Snackbar
 import android.support.v4.app.Fragment
 import android.support.v7.widget.LinearLayoutManager
 import android.view.LayoutInflater
@@ -8,12 +10,13 @@ import android.view.View
 import android.view.ViewGroup
 import kotlinx.android.synthetic.main.fragment_feed.*
 import me.smbduknow.theatrics.R
-import me.smbduknow.theatrics.mvp.FeedMvpPresenter
 import me.smbduknow.theatrics.mvp.FeedMvpView
 import me.smbduknow.theatrics.presenter.FeedPresenter
+import me.smbduknow.theatrics.presenter.FeedState
 import me.smbduknow.theatrics.ui.commons.InfiniteScrollListener
 import me.smbduknow.theatrics.ui.commons.inflate
 import me.smbduknow.theatrics.ui.model.UiEvent
+import java.util.*
 
 
 class EventsFragment : Fragment(), FeedMvpView {
@@ -22,9 +25,9 @@ class EventsFragment : Fragment(), FeedMvpView {
     private val feedList by lazy { feed_list }
     private val feedEmpty by lazy { feed_empty }
 
-    private val presenter: FeedMvpPresenter by lazy { FeedPresenter(this) }
+    private val presenter by lazy { FeedPresenter(this, state) }
 
-    private var page = 0
+    private var state = FeedState(0, 0, 0)
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return container?.inflate(R.layout.fragment_feed)
@@ -38,7 +41,10 @@ class EventsFragment : Fragment(), FeedMvpView {
             setHasFixedSize(true)
             layoutManager = linearLayout
             clearOnScrollListeners()
-            addOnScrollListener(InfiniteScrollListener(linearLayout, { presenter.requestFeed(15, ++page) } ))
+            addOnScrollListener(InfiniteScrollListener(linearLayout, {
+                Snackbar.make(view as View, "${state.listPage}" as CharSequence, Snackbar.LENGTH_SHORT).show()
+                presenter.requestFeed(15, ++state.listPage)
+            } ))
             adapter = EventsAdapter()
         }
     }
@@ -46,9 +52,26 @@ class EventsFragment : Fragment(), FeedMvpView {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         if (savedInstanceState == null) {
-            page = 0
-            presenter.requestFeed(15, page)
+            state.listPage = 0
+            presenter.requestFeed(15, state.listPage)
+        } else {
+            showFeed()
+            addItems(savedInstanceState.getSerializable("list_data") as ArrayList<UiEvent>)
+            feedList.scrollToPosition(savedInstanceState.getInt("listPosition"))
+            state.listPage = savedInstanceState.getInt("listPage")
         }
+    }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        outState.putParcelable("state", state.apply {
+            listItems = (feedList.adapter as EventsAdapter).getNews()
+            listPosition = (feedList.layoutManager as LinearLayoutManager).findFirstVisibleItemPosition()
+        })
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
     }
 
     override fun showLoader(visible: Boolean) {
