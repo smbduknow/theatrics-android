@@ -1,9 +1,10 @@
 package me.smbduknow.theatrics.ui
 
 import android.os.Bundle
-import android.os.Parcel
 import android.support.design.widget.Snackbar
 import android.support.v4.app.Fragment
+import android.support.v4.app.LoaderManager
+import android.support.v4.content.Loader
 import android.support.v7.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.View
@@ -12,20 +13,20 @@ import kotlinx.android.synthetic.main.fragment_feed.*
 import me.smbduknow.theatrics.R
 import me.smbduknow.theatrics.mvp.FeedMvpView
 import me.smbduknow.theatrics.presenter.FeedPresenter
+import me.smbduknow.theatrics.presenter.FeedPresenterLoader
 import me.smbduknow.theatrics.presenter.FeedState
 import me.smbduknow.theatrics.ui.commons.InfiniteScrollListener
 import me.smbduknow.theatrics.ui.commons.inflate
 import me.smbduknow.theatrics.ui.model.UiEvent
-import java.util.*
 
 
-class EventsFragment : Fragment(), FeedMvpView {
+class EventsFragment : Fragment(), FeedMvpView, LoaderManager.LoaderCallbacks<FeedPresenter> {
 
     private val feedLoader by lazy { feed_loader }
     private val feedList by lazy { feed_list }
     private val feedEmpty by lazy { feed_empty }
 
-    private val presenter by lazy { FeedPresenter(this, state) }
+    private var presenter: FeedPresenter? = null
 
     private var state = FeedState(0, 0, 0)
 
@@ -43,7 +44,7 @@ class EventsFragment : Fragment(), FeedMvpView {
             clearOnScrollListeners()
             addOnScrollListener(InfiniteScrollListener(linearLayout, {
                 Snackbar.make(view as View, "${state.listPage}" as CharSequence, Snackbar.LENGTH_SHORT).show()
-                presenter.requestFeed(15, ++state.listPage)
+                presenter?.requestNext()
             } ))
             adapter = EventsAdapter()
         }
@@ -53,13 +54,45 @@ class EventsFragment : Fragment(), FeedMvpView {
         super.onActivityCreated(savedInstanceState)
         if (savedInstanceState == null) {
             state.listPage = 0
-            presenter.requestFeed(15, state.listPage)
         } else {
             showFeed()
-            addItems(savedInstanceState.getSerializable("list_data") as ArrayList<UiEvent>)
-            feedList.scrollToPosition(savedInstanceState.getInt("listPosition"))
-            state.listPage = savedInstanceState.getInt("listPage")
+            state = savedInstanceState.getParcelable("state")
+            addItems(state.listItems)
         }
+
+//      LoaderCallbacks as an object, so no hint regarding loader will be leak to the subclasses.
+        loaderManager.initLoader(101, null, this)
+    }
+
+
+    override fun onCreateLoader(id: Int, args: Bundle?): Loader<FeedPresenter> {
+        return FeedPresenterLoader(context)
+    }
+
+    override fun onLoadFinished(loader: Loader<FeedPresenter>, presenter: FeedPresenter) {
+        if (this@EventsFragment.presenter == null) {
+            this@EventsFragment.presenter = presenter
+        }
+    }
+
+    override fun onLoaderReset(loader: Loader<FeedPresenter>) {
+        this@EventsFragment.presenter = null
+    }
+
+
+
+    override fun onResume() {
+        super.onResume()
+        presenter?.onViewAttached(this)
+        if(state.state == 0) {
+            presenter?.requestNext(true)
+            state.state = 1
+        }
+    }
+
+    override fun onPause() {
+        presenter?.onViewDetached()
+        super.onPause()
     }
 
     override fun onSaveInstanceState(outState: Bundle) {
