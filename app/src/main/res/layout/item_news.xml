@@ -1,33 +1,48 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v7.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:orientation="horizontal"
-    android:padding="5dip">
+    style="@style/AppTheme.CardView"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
 
-    <TextView
-        android:id="@+id/title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textColor="#040404"
-        android:textSize="15sp"
-        android:textStyle="bold"
-        android:typeface="sans"
-        tools:text="This should be a long description like this example that I'm showing." />
-
-    <TextView
-        android:id="@+id/description"
+    <LinearLayout
+        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/title"
-        android:layout_alignStart="@+id/title"
-        android:layout_below="@+id/title"
-        android:textColor="#343434"
-        android:textSize="10sp"
-        android:maxLines="3"
-        android:ellipsize="end"
-        tools:ignore="SmallSp"
-        tools:text="Author 123" />
+        android:layout_height="wrap_content">
 
-</RelativeLayout>
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="160dp"
+            android:src="@color/gray_77"/>
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/margin_large">
+            <TextView
+                android:id="@+id/title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:maxLines="2"
+                android:ellipsize="end"
+                android:textColor="@color/text_title"
+                android:textSize="@dimen/font_title"
+                tools:text="This should be a long title like lorem ipsum but much longer" />
+            <TextView
+                android:id="@+id/description"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_small"
+                android:maxLines="3"
+                android:ellipsize="end"
+                android:textColor="@color/text_primary"
+                android:textSize="@dimen/font_normal"
+                tools:text="Long and useless description" />
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+</android.support.v7.widget.CardView>

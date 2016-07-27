@@ -15,6 +15,7 @@ import me.smbduknow.theatrics.mvp.PresenterLoaderCallback
 import me.smbduknow.theatrics.presenter.FeedPresenter
 import me.smbduknow.theatrics.presenter.FeedState
 import me.smbduknow.theatrics.ui.commons.InfiniteScrollListener
+import me.smbduknow.theatrics.ui.commons.SpaceItemDecorator
 import me.smbduknow.theatrics.ui.commons.inflate
 import me.smbduknow.theatrics.ui.model.UiEvent
 
@@ -43,6 +44,7 @@ class EventsFragment : Fragment(), FeedMvpView {
         feedList.apply {
             setHasFixedSize(true)
             layoutManager = linearLayout
+            addItemDecoration(SpaceItemDecorator(SpaceItemDecorator.VERTICAL))
             clearOnScrollListeners()
             addOnScrollListener(InfiniteScrollListener(linearLayout, { presenter?.requestNext() } ))
             adapter = EventsAdapter()

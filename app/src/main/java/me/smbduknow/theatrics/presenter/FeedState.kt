@@ -11,6 +11,17 @@ data class FeedState(
         var listItems: List<UiEvent> = emptyList()
 ) : Parcelable {
 
+    companion object {
+        val STATE_LOADING = 0
+        val STATE_CONTENT = 1
+        val STATE_EMPTY = 2
+
+        @JvmField val CREATOR: Parcelable.Creator<FeedState> = object : Parcelable.Creator<FeedState> {
+            override fun createFromParcel(source: Parcel): FeedState = FeedState(source)
+            override fun newArray(size: Int): Array<FeedState?> = arrayOfNulls(size)
+        }
+    }
+
     constructor(source: Parcel): this(
             source.readInt(),
             source.readInt(),
@@ -26,11 +37,6 @@ data class FeedState(
         dest?.writeTypedList(listItems)
     }
 
-    companion object {
-        @JvmField val CREATOR: Parcelable.Creator<FeedState> = object : Parcelable.Creator<FeedState> {
-            override fun createFromParcel(source: Parcel): FeedState = FeedState(source)
-            override fun newArray(size: Int): Array<FeedState?> = arrayOfNulls(size)
-        }
-    }
+
 
 }

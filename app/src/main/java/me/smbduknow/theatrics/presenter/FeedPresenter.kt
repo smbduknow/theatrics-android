@@ -25,11 +25,15 @@ class FeedPresenter : FeedMvpPresenter {
         this.view = null
     }
 
+    override fun onDestroy() {
+        subscription?.unsubscribe()
+    }
+
     override fun requestNext(refresh: Boolean) {
         if(subscription != null) return
         if(refresh) view?.showLoader()
         subscription = ApiFactory.getApi().getEvents(20, 1)
-                .delay(5, TimeUnit.SECONDS)
+                .delay(2, TimeUnit.SECONDS)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(
