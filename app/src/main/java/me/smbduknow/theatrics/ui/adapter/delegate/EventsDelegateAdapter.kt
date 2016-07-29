@@ -1,4 +1,4 @@
-package me.smbduknow.theatrics.ui
+package me.smbduknow.theatrics.ui.adapter.delegate
 
 import android.support.v7.widget.RecyclerView
 import android.text.Html

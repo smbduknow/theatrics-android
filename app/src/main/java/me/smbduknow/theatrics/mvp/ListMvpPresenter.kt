@@ -1,6 +1,6 @@
 package me.smbduknow.theatrics.mvp
 
-interface FeedMvpPresenter : MvpPresenter<FeedMvpView> {
+interface ListMvpPresenter : MvpPresenter<ListMvpView> {
 
     fun requestNext(refresh: Boolean = false)
 

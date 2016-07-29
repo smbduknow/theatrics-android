@@ -1,35 +1,33 @@
 package me.smbduknow.theatrics.ui
 
 import android.os.Bundle
-import android.support.v4.app.Fragment
-import android.support.v4.app.LoaderManager
 import android.support.v7.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import kotlinx.android.synthetic.main.fragment_feed.*
 import me.smbduknow.theatrics.R
-import me.smbduknow.theatrics.mvp.FeedMvpPresenter
-import me.smbduknow.theatrics.mvp.FeedMvpView
-import me.smbduknow.theatrics.mvp.PresenterLoaderCallback
-import me.smbduknow.theatrics.presenter.FeedPresenter
-import me.smbduknow.theatrics.presenter.FeedState
+import me.smbduknow.theatrics.mvp.ListMvpPresenter
+import me.smbduknow.theatrics.mvp.ListMvpView
+import me.smbduknow.theatrics.presenter.EventPresenter
+import me.smbduknow.theatrics.presenter.ListState
+import me.smbduknow.theatrics.ui.adapter.EventsAdapter
 import me.smbduknow.theatrics.ui.commons.InfiniteScrollListener
 import me.smbduknow.theatrics.ui.commons.SpaceItemDecorator
 import me.smbduknow.theatrics.ui.commons.inflate
 import me.smbduknow.theatrics.ui.model.UiEvent
 
 
-class EventsFragment : Fragment(), FeedMvpView {
+class EventsFragment : MvpFragment<ListMvpPresenter, ListMvpView>(), ListMvpView {
 
     private val feedLoader by lazy { feed_loader }
     private val feedSwipeRefresh by lazy { feed_swipe_refresh }
     private val feedList by lazy { feed_list }
     private val feedEmpty by lazy { feed_empty }
 
-    private var presenter: FeedMvpPresenter? = null
+    private var state = ListState(0, 0, 0)
 
-    private var state = FeedState(0, 0, 0)
+    override fun onCreatePresenter(): ListMvpPresenter = EventPresenter()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return container?.inflate(R.layout.fragment_feed)
@@ -53,6 +51,18 @@ class EventsFragment : Fragment(), FeedMvpView {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
+        loaderManager.initLoader(101, null, this)
+    }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        outState.putParcelable("state", state.apply {
+            listItems = (feedList.adapter as EventsAdapter).getItems()
+        })
+    }
+
+    override fun onViewStateRestored(savedInstanceState: Bundle?) {
+        super.onViewStateRestored(savedInstanceState)
         if (savedInstanceState == null) {
             state.listPage = 0
         } else {
@@ -60,14 +70,7 @@ class EventsFragment : Fragment(), FeedMvpView {
             state = savedInstanceState.getParcelable("state")
             addItems(state.listItems)
         }
-
-        loaderManager.initLoader(101, null, PresenterLoaderCallback(context,
-                { FeedPresenter() },
-                { if(presenter == null) presenter = it },
-                { presenter = null }
-        ))
     }
-
 
 
     override fun onResume() {
@@ -84,12 +87,7 @@ class EventsFragment : Fragment(), FeedMvpView {
         super.onPause()
     }
 
-    override fun onSaveInstanceState(outState: Bundle) {
-        super.onSaveInstanceState(outState)
-        outState.putParcelable("state", state.apply {
-            listItems = (feedList.adapter as EventsAdapter).getNews()
-        })
-    }
+
 
     override fun showLoader(visible: Boolean) {
         feedSwipeRefresh.isRefreshing = true
@@ -117,7 +115,11 @@ class EventsFragment : Fragment(), FeedMvpView {
     }
 
     override fun addItems(items: List<UiEvent>) {
-        (feedList.adapter as EventsAdapter).addNews(items)
+        (feedList.adapter as EventsAdapter).addItems(items)
+    }
+
+    override fun clearItems() {
+        (feedList.adapter as EventsAdapter).clear()
     }
 
 }

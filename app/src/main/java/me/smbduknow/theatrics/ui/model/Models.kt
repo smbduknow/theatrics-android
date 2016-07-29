@@ -2,7 +2,7 @@ package me.smbduknow.theatrics.ui.model
 
 import android.os.Parcel
 import android.os.Parcelable
-import me.smbduknow.theatrics.ui.commons.adapter.AdapterConst
+import me.smbduknow.theatrics.ui.adapter.EventsAdapter
 import me.smbduknow.theatrics.ui.commons.adapter.ViewModel
 
 data class UiEvent(
@@ -11,7 +11,7 @@ data class UiEvent(
         val description: String
 ): ViewModel, Parcelable {
 
-    override fun getViewType() = AdapterConst.ITEM_EVENT
+    override fun getViewType() = EventsAdapter.ITEM_EVENT
 
     constructor(source: Parcel): this(
             source.readString(),

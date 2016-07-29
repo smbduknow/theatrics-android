@@ -1,9 +1,9 @@
-package me.smbduknow.theatrics.ui
+package me.smbduknow.theatrics.ui.adapter
 
 import android.support.v4.util.SparseArrayCompat
 import android.support.v7.widget.RecyclerView
 import android.view.ViewGroup
-import me.smbduknow.theatrics.ui.commons.adapter.AdapterConst
+import me.smbduknow.theatrics.ui.adapter.delegate.EventsDelegateAdapter
 import me.smbduknow.theatrics.ui.commons.adapter.LoadingDelegateAdapter
 import me.smbduknow.theatrics.ui.commons.adapter.ViewModel
 import me.smbduknow.theatrics.ui.commons.adapter.ViewModelDelegateAdapter
@@ -12,18 +12,22 @@ import java.util.*
 
 class EventsAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
+    companion object {
+        val ITEM_EVENT = 0
+        val LOADING = 1
+    }
+
     private var items: ArrayList<ViewModel>
     private var delegateAdapters = SparseArrayCompat<ViewModelDelegateAdapter>()
 
     private val loadingItem = object : ViewModel {
-        override fun getViewType() = AdapterConst.LOADING
+        override fun getViewType() = LOADING
     }
 
     init {
-        delegateAdapters.put(AdapterConst.LOADING, LoadingDelegateAdapter())
-        delegateAdapters.put(AdapterConst.ITEM_EVENT, EventsDelegateAdapter())
+        delegateAdapters.put(LOADING, LoadingDelegateAdapter())
+        delegateAdapters.put(ITEM_EVENT, EventsDelegateAdapter())
         items = ArrayList()
-        items.add(loadingItem)
     }
 
     override fun getItemCount() = items.size
@@ -40,30 +44,33 @@ class EventsAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
 
 
-    fun addNews(news: List<UiEvent>) {
-        // first remove loading and notify
-        val initPosition = items.size - 1
-        items.removeAt(initPosition)
-        notifyItemRemoved(initPosition)
+    fun addItems(events: List<UiEvent>) {
+        if(!items.isEmpty()) {
+            val initPosition = items.size - 1
+            items.removeAt(initPosition)
+//            notifyItemRemoved(initPosition)
+        }
 
-        // insert news and the loading at the end of the list
-        items.addAll(news)
+        val lastPosition = getLastPosition()
+        items.addAll(events)
         items.add(loadingItem)
-        notifyItemRangeChanged(initPosition, items.size + 1 /* plus loading item */)
+//        notifyItemRangeChanged(lastPosition, items.size + 1 /* plus loading item */)
+        notifyDataSetChanged()
     }
 
-    fun clearAndAddNews(news: List<UiEvent>) {
-        items.clear()
-        notifyItemRangeRemoved(0, getLastPosition())
-
-        items.addAll(news)
-        items.add(loadingItem)
-        notifyItemRangeInserted(0, items.size)
+    fun clear() {
+        if(!items.isEmpty()) {
+            items.clear()
+//            notifyItemRangeRemoved(0, getLastPosition())
+            items.add(loadingItem)
+//            notifyItemInserted(0)
+            notifyDataSetChanged()
+        }
     }
 
-    fun getNews(): ArrayList<UiEvent> {
+    fun getItems(): ArrayList<UiEvent> {
         return  items
-                .filter { it.getViewType() == AdapterConst.ITEM_EVENT }
+                .filter { it.getViewType() == ITEM_EVENT }
                 .map { it as UiEvent }
                 as ArrayList<UiEvent>
     }

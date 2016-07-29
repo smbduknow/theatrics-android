@@ -4,7 +4,7 @@ import android.os.Parcel
 import android.os.Parcelable
 import me.smbduknow.theatrics.ui.model.UiEvent
 
-data class FeedState(
+data class ListState(
         var state: Int,
         var listPage: Int,
         var listPosition: Int,
@@ -16,9 +16,9 @@ data class FeedState(
         val STATE_CONTENT = 1
         val STATE_EMPTY = 2
 
-        @JvmField val CREATOR: Parcelable.Creator<FeedState> = object : Parcelable.Creator<FeedState> {
-            override fun createFromParcel(source: Parcel): FeedState = FeedState(source)
-            override fun newArray(size: Int): Array<FeedState?> = arrayOfNulls(size)
+        @JvmField val CREATOR: Parcelable.Creator<ListState> = object : Parcelable.Creator<ListState> {
+            override fun createFromParcel(source: Parcel): ListState = ListState(source)
+            override fun newArray(size: Int): Array<ListState?> = arrayOfNulls(size)
         }
     }
 
