@@ -57,7 +57,8 @@ class EventPresenter : ListMvpPresenter {
             UiEvent(
                     it.title,
                     it.type,
-                    it.description )
+                    it.description,
+                    it.getTitleImage())
         })
         view?.showFeed()
         page++

@@ -5,15 +5,17 @@ import android.os.Parcelable
 import me.smbduknow.theatrics.ui.adapter.EventsAdapter
 import me.smbduknow.theatrics.ui.commons.adapter.ViewModel
 
-data class UiEvent(
+class UiEvent(
         val title: String,
         val type: String,
-        val description: String
+        val description: String,
+        val image: String
 ): ViewModel, Parcelable {
 
     override fun getViewType() = EventsAdapter.ITEM_EVENT
 
     constructor(source: Parcel): this(
+            source.readString(),
             source.readString(),
             source.readString(),
             source.readString())
@@ -24,6 +26,7 @@ data class UiEvent(
         dest?.writeString(title)
         dest?.writeString(type)
         dest?.writeString(description)
+        dest?.writeString(image)
     }
 
     companion object {
