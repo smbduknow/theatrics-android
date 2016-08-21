@@ -9,7 +9,7 @@ class LoadingDelegateAdapter : ViewModelDelegateAdapter {
 
     override fun onCreateViewHolder(parent: ViewGroup) = ViewHolder(parent)
 
-    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, item: ViewModel) {}
+    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, item: ViewModel, position: Int) {}
 
     class ViewHolder(parent: ViewGroup) : RecyclerView.ViewHolder(parent.inflate(R.layout.item_loading))
 }

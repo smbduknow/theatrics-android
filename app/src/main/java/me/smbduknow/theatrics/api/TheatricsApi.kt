@@ -19,7 +19,7 @@ interface TheatricsApi {
     @GET("/api/v1/events/{id}/")
     fun getEvent(
             @Path("id") id: Int
-    ) : Observable<Object>
+    ) : Observable<ApiFeedItem>
 
 
 //    @GET("/api/v1/places/")

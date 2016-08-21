@@ -1,12 +1,9 @@
-package me.smbduknow.theatrics.ui
+package me.smbduknow.theatrics.mvp
 
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v4.app.LoaderManager
 import android.support.v4.content.Loader
-import me.smbduknow.theatrics.mvp.MvpPresenter
-import me.smbduknow.theatrics.mvp.MvpView
-import me.smbduknow.theatrics.mvp.PresenterLoader
 
 
 abstract class MvpFragment<P : MvpPresenter<V>, V : MvpView> : Fragment(), MvpView, LoaderManager.LoaderCallbacks<P> {

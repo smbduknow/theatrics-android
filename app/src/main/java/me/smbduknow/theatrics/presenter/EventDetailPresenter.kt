@@ -4,6 +4,8 @@ import me.smbduknow.theatrics.BuildConfig
 import me.smbduknow.theatrics.api.ApiFactory
 import me.smbduknow.theatrics.api.model.ApiFeedItem
 import me.smbduknow.theatrics.api.model.ApiListResponse
+import me.smbduknow.theatrics.mvp.DetailMvpPresenter
+import me.smbduknow.theatrics.mvp.DetailMvpView
 import me.smbduknow.theatrics.mvp.ListMvpPresenter
 import me.smbduknow.theatrics.mvp.ListMvpView
 import me.smbduknow.theatrics.ui.model.UiEvent
@@ -12,15 +14,13 @@ import rx.android.schedulers.AndroidSchedulers
 import rx.schedulers.Schedulers
 import java.util.concurrent.TimeUnit
 
-class EventPresenter : ListMvpPresenter {
+class EventDetailPresenter : DetailMvpPresenter {
 
-    private var view: ListMvpView? = null
+    private var view: DetailMvpView? = null
 
     private var subscription: Subscription? = null
 
-    private var page = 1
-
-    override fun onViewAttached(view: ListMvpView) {
+    override fun onViewAttached(view: DetailMvpView) {
         this.view = view
     }
 
@@ -32,16 +32,12 @@ class EventPresenter : ListMvpPresenter {
         subscription?.unsubscribe()
     }
 
-    override fun requestNext(refresh: Boolean) {
+    override fun requestDetail() {
         if(subscription != null) return
 
-        if(refresh) {
-            view?.showLoader()
-            view?.clearItems()
-            page = 1
-        }
-        subscription = ApiFactory.getApi().getEvents(10, page)
-                .delay(2, TimeUnit.SECONDS)
+        view?.showLoader()
+
+        subscription = ApiFactory.getApi().getEvent(10)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(
@@ -52,16 +48,10 @@ class EventPresenter : ListMvpPresenter {
 
     }
 
-    private fun handleResponse(response: ApiListResponse<ApiFeedItem>) {
-        view?.addItems(response.items.map {
-            UiEvent(
-                    it.title,
-                    it.type,
-                    it.description,
-                    it.getTitleImage())
-        })
-        view?.showFeed()
-        page++
+    private fun handleResponse(response: ApiFeedItem) {
+        view?.setTitle(response.title)
+        view?.setImage(response.getTitleImage())
+        view?.showDetail()
     }
 
     private fun handleError(error: Throwable) {

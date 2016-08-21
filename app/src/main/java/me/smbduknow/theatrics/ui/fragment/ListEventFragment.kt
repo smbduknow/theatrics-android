@@ -1,5 +1,6 @@
-package me.smbduknow.theatrics.ui
+package me.smbduknow.theatrics.ui.fragment
 
+import android.content.Intent
 import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
 import android.view.LayoutInflater
@@ -9,8 +10,10 @@ import kotlinx.android.synthetic.main.fragment_feed.*
 import me.smbduknow.theatrics.R
 import me.smbduknow.theatrics.mvp.ListMvpPresenter
 import me.smbduknow.theatrics.mvp.ListMvpView
-import me.smbduknow.theatrics.presenter.EventPresenter
+import me.smbduknow.theatrics.mvp.MvpFragment
+import me.smbduknow.theatrics.presenter.EventListPresenter
 import me.smbduknow.theatrics.presenter.ListState
+import me.smbduknow.theatrics.ui.activity.DetailActivity
 import me.smbduknow.theatrics.ui.adapter.EventsAdapter
 import me.smbduknow.theatrics.ui.commons.InfiniteScrollListener
 import me.smbduknow.theatrics.ui.commons.SpaceItemDecorator
@@ -18,7 +21,7 @@ import me.smbduknow.theatrics.ui.commons.inflate
 import me.smbduknow.theatrics.ui.model.UiEvent
 
 
-class EventsFragment : MvpFragment<ListMvpPresenter, ListMvpView>(), ListMvpView {
+class ListEventFragment : MvpFragment<ListMvpPresenter, ListMvpView>(), ListMvpView {
 
     private val feedLoader by lazy { feed_loader }
     private val feedSwipeRefresh by lazy { feed_swipe_refresh }
@@ -27,7 +30,7 @@ class EventsFragment : MvpFragment<ListMvpPresenter, ListMvpView>(), ListMvpView
 
     private var state = ListState(0, 0, 0)
 
-    override fun onCreatePresenter(): ListMvpPresenter = EventPresenter()
+    override fun onCreatePresenter(): ListMvpPresenter = EventListPresenter()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return container?.inflate(R.layout.fragment_feed)
@@ -42,10 +45,14 @@ class EventsFragment : MvpFragment<ListMvpPresenter, ListMvpView>(), ListMvpView
         feedList.apply {
             setHasFixedSize(true)
             layoutManager = linearLayout
-            addItemDecoration(SpaceItemDecorator(SpaceItemDecorator.VERTICAL))
+            addItemDecoration(SpaceItemDecorator(SpaceItemDecorator.Companion.VERTICAL))
             clearOnScrollListeners()
             addOnScrollListener(InfiniteScrollListener(linearLayout, { presenter?.requestNext() } ))
             adapter = EventsAdapter()
+            (adapter as EventsAdapter).setOnItemClickListener { position ->
+                val intent = Intent(context, DetailActivity::class.java)
+                startActivity(intent);
+            }
         }
     }
 

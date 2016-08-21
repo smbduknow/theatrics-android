@@ -1,32 +1,20 @@
-package me.smbduknow.theatrics.ui
+package me.smbduknow.theatrics.ui.activity
 
-import android.os.Bundle
+import android.support.annotation.IdRes
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
 import android.support.v7.app.AppCompatActivity
-import android.support.v7.widget.Toolbar
-import me.smbduknow.theatrics.R
 
-class MainActivity : AppCompatActivity() {
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
-        val toolbar = findViewById(R.id.toolbar) as Toolbar?
-        setSupportActionBar(toolbar)
+abstract class BaseFragmentActivity : AppCompatActivity() {
 
-        if (savedInstanceState == null) {
-            changeFragment(EventsFragment())
-        }
-    }
-
-    fun changeFragment(f: Fragment, cleanStack: Boolean = false) {
+    fun changeFragment(@IdRes container: Int, f: Fragment, cleanStack: Boolean = false) {
         val ft = supportFragmentManager.beginTransaction();
         if (cleanStack) {
             clearBackStack()
         }
-        ft.setCustomAnimations(R.anim.abc_fade_in, R.anim.abc_fade_out, R.anim.abc_popup_enter, R.anim.abc_popup_exit)
-        ft.replace(R.id.content_main, f)
+        // TODO fragment animation management
+        ft.replace(container, f)
         ft.addToBackStack(null)
         ft.commit()
     }
@@ -50,5 +38,6 @@ class MainActivity : AppCompatActivity() {
             finish()
         }
     }
+
 
 }

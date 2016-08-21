@@ -13,20 +13,26 @@ import me.smbduknow.theatrics.ui.model.UiEvent
 
 class EventsDelegateAdapter : ViewModelDelegateAdapter {
 
+    var listener: (position: Int) -> Unit = {}
+
     override fun onCreateViewHolder(parent: ViewGroup): RecyclerView.ViewHolder {
         return ViewHolder(parent)
     }
 
-    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, item: ViewModel) {
+    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, item: ViewModel, position: Int) {
         holder as ViewHolder
-        holder.bind(item as UiEvent)
+        holder.bind(item as UiEvent, position, listener)
     }
 
     class ViewHolder(parent: ViewGroup) : RecyclerView.ViewHolder(parent.inflate(R.layout.item_event)) {
-        fun bind(item: UiEvent) = with(itemView) {
-            title.text = item.title.capitalize()
-            description.text = Html.fromHtml(item.description.trim().capitalize())
-            image.loadImg(item.image)
+        fun bind(item: UiEvent, position: Int, listener: (position: Int) -> Unit) {
+            with(itemView) {
+                title.text = item.title.capitalize()
+                description.text = Html.fromHtml(item.description.trim().capitalize())
+                image.loadImg(item.image)
+                setOnClickListener { v -> listener(position) }
+            }
         }
     }
+
 }

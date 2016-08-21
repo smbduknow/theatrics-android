@@ -39,7 +39,7 @@ class EventsAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-        delegateAdapters.get(getItemViewType(position)).onBindViewHolder(holder, this.items[position])
+        delegateAdapters.get(getItemViewType(position)).onBindViewHolder(holder, this.items[position], position)
     }
 
 
@@ -76,6 +76,10 @@ class EventsAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     }
 
     private fun getLastPosition() = if (items.lastIndex == -1) 0 else items.lastIndex
+
+    fun setOnItemClickListener(listener: (position: Int) -> Unit) {
+        (delegateAdapters.get(ITEM_EVENT) as EventsDelegateAdapter).listener = listener
+    }
 
 }
 

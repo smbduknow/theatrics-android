@@ -7,5 +7,5 @@ interface ViewModelDelegateAdapter {
 
     fun onCreateViewHolder(parent: ViewGroup): RecyclerView.ViewHolder
 
-    fun onBindViewHolder(holder: RecyclerView.ViewHolder, item: ViewModel)
+    fun onBindViewHolder(holder: RecyclerView.ViewHolder, item: ViewModel, position: Int)
 }
