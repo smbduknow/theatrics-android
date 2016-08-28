@@ -4,33 +4,17 @@ import me.smbduknow.theatrics.BuildConfig
 import me.smbduknow.theatrics.api.ApiFactory
 import me.smbduknow.theatrics.api.model.ApiFeedItem
 import me.smbduknow.theatrics.api.model.ApiListResponse
+import me.smbduknow.theatrics.mvp.BaseMvpPresenter
 import me.smbduknow.theatrics.mvp.ListMvpPresenter
 import me.smbduknow.theatrics.mvp.ListMvpView
 import me.smbduknow.theatrics.ui.model.UiEvent
-import rx.Subscription
 import rx.android.schedulers.AndroidSchedulers
 import rx.schedulers.Schedulers
 import java.util.concurrent.TimeUnit
 
-class EventListPresenter : ListMvpPresenter {
-
-    private var view: ListMvpView? = null
-
-    private var subscription: Subscription? = null
+class EventListPresenter : BaseMvpPresenter<ListMvpView>(),ListMvpPresenter {
 
     private var page = 1
-
-    override fun onViewAttached(view: ListMvpView) {
-        this.view = view
-    }
-
-    override fun onViewDetached() {
-        this.view = null
-    }
-
-    override fun onDestroy() {
-        subscription?.unsubscribe()
-    }
 
     override fun requestNext(refresh: Boolean) {
         if(subscription != null) return

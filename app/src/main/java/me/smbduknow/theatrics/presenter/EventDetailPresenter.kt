@@ -3,34 +3,13 @@ package me.smbduknow.theatrics.presenter
 import me.smbduknow.theatrics.BuildConfig
 import me.smbduknow.theatrics.api.ApiFactory
 import me.smbduknow.theatrics.api.model.ApiFeedItem
-import me.smbduknow.theatrics.api.model.ApiListResponse
+import me.smbduknow.theatrics.mvp.BaseMvpPresenter
 import me.smbduknow.theatrics.mvp.DetailMvpPresenter
 import me.smbduknow.theatrics.mvp.DetailMvpView
-import me.smbduknow.theatrics.mvp.ListMvpPresenter
-import me.smbduknow.theatrics.mvp.ListMvpView
-import me.smbduknow.theatrics.ui.model.UiEvent
-import rx.Subscription
 import rx.android.schedulers.AndroidSchedulers
 import rx.schedulers.Schedulers
-import java.util.concurrent.TimeUnit
 
-class EventDetailPresenter : DetailMvpPresenter {
-
-    private var view: DetailMvpView? = null
-
-    private var subscription: Subscription? = null
-
-    override fun onViewAttached(view: DetailMvpView) {
-        this.view = view
-    }
-
-    override fun onViewDetached() {
-        this.view = null
-    }
-
-    override fun onDestroy() {
-        subscription?.unsubscribe()
-    }
+class EventDetailPresenter : BaseMvpPresenter<DetailMvpView>(), DetailMvpPresenter {
 
     override fun requestDetail() {
         if(subscription != null) return
