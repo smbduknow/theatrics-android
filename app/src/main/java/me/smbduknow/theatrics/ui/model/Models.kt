@@ -1,38 +1,35 @@
 package me.smbduknow.theatrics.ui.model
 
-import android.os.Parcel
-import android.os.Parcelable
-import me.smbduknow.theatrics.ui.adapter.EventsAdapter
 import me.smbduknow.theatrics.ui.commons.adapter.ViewModel
+import java.util.*
+
+
+class UiLoader() : ViewModel
+
 
 class UiEvent(
+        val id: Long,
         val title: String,
         val type: String,
         val description: String,
         val image: String
-): ViewModel, Parcelable {
+) : ViewModel
 
-    override fun getViewType() = EventsAdapter.ITEM_EVENT
 
-    constructor(source: Parcel): this(
-            source.readString(),
-            source.readString(),
-            source.readString(),
-            source.readString())
-
-    override fun describeContents() = 0
-
-    override fun writeToParcel(dest: Parcel?, flags: Int) {
-        dest?.writeString(title)
-        dest?.writeString(type)
-        dest?.writeString(description)
-        dest?.writeString(image)
-    }
-
-    companion object {
-        @JvmField val CREATOR: Parcelable.Creator<UiEvent> = object : Parcelable.Creator<UiEvent> {
-            override fun createFromParcel(source: Parcel): UiEvent = UiEvent(source)
-            override fun newArray(size: Int): Array<UiEvent?> = arrayOfNulls(size)
-        }
-    }
+object ViewState {
+    val STATE_LOADING = 0
+    val STATE_CONTENT = 1
+    val STATE_EMPTY = 2
 }
+
+class UiFeedView (
+        var state: Int,
+        var listPage: Int,
+        var listItems: ArrayList<UiEvent> = ArrayList()
+) : ViewModel
+
+
+class UiDetailView(
+        var state: Int,
+        var detailItem: UiEvent? = null
+) : ViewModel

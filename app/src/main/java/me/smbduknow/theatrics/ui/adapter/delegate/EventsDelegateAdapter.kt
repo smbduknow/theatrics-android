@@ -15,9 +15,9 @@ class EventsDelegateAdapter : ViewModelDelegateAdapter {
 
     var listener: (position: Int) -> Unit = {}
 
-    override fun onCreateViewHolder(parent: ViewGroup): RecyclerView.ViewHolder {
-        return ViewHolder(parent)
-    }
+    override fun isForViewType(item: ViewModel, position: Int) = item is UiEvent
+
+    override fun onCreateViewHolder(parent: ViewGroup) = ViewHolder(parent)
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, item: ViewModel, position: Int) {
         holder as ViewHolder

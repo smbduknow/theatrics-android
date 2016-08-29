@@ -12,13 +12,14 @@ import me.smbduknow.theatrics.mvp.ListMvpPresenter
 import me.smbduknow.theatrics.mvp.ListMvpView
 import me.smbduknow.theatrics.mvp.MvpFragment
 import me.smbduknow.theatrics.presenter.EventListPresenter
-import me.smbduknow.theatrics.presenter.ListState
 import me.smbduknow.theatrics.ui.activity.DetailActivity
 import me.smbduknow.theatrics.ui.adapter.EventsAdapter
 import me.smbduknow.theatrics.ui.commons.InfiniteScrollListener
 import me.smbduknow.theatrics.ui.commons.SpaceItemDecorator
 import me.smbduknow.theatrics.ui.commons.inflate
 import me.smbduknow.theatrics.ui.model.UiEvent
+import me.smbduknow.theatrics.ui.model.UiFeedView
+import me.smbduknow.theatrics.ui.model.ViewState
 
 
 class ListEventFragment : MvpFragment<ListMvpPresenter, ListMvpView>(), ListMvpView {
@@ -28,7 +29,9 @@ class ListEventFragment : MvpFragment<ListMvpPresenter, ListMvpView>(), ListMvpV
     private val feedList by lazy { feed_list }
     private val feedEmpty by lazy { feed_empty }
 
-    private var state = ListState(0, 0, 0)
+    private var feedAdapter: EventsAdapter? = null
+
+    private var state = UiFeedView(ViewState.STATE_LOADING, 0)
 
     override fun onCreatePresenter(): ListMvpPresenter = EventListPresenter()
 
@@ -42,28 +45,21 @@ class ListEventFragment : MvpFragment<ListMvpPresenter, ListMvpView>(), ListMvpV
         feedSwipeRefresh.setOnRefreshListener { presenter?.requestNext(true) }
 
         val linearLayout = LinearLayoutManager(context)
+        feedAdapter = EventsAdapter()
+        feedAdapter?.setOnItemClickListener { position -> startDetailActivity(position) }
         feedList.apply {
             setHasFixedSize(true)
             layoutManager = linearLayout
             addItemDecoration(SpaceItemDecorator(SpaceItemDecorator.Companion.VERTICAL))
             clearOnScrollListeners()
             addOnScrollListener(InfiniteScrollListener(linearLayout, { presenter?.requestNext() } ))
-            adapter = EventsAdapter()
-            (adapter as EventsAdapter).setOnItemClickListener { position ->
-                val intent = Intent(context, DetailActivity::class.java)
-                startActivity(intent);
-            }
+            adapter = feedAdapter
         }
-    }
-
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        loaderManager.initLoader(101, null, this)
     }
 
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
-        outState.putParcelable("state", state.apply {
+        outState.putSerializable("state", state.apply {
             listItems = (feedList.adapter as EventsAdapter).getItems()
         })
     }
@@ -74,7 +70,7 @@ class ListEventFragment : MvpFragment<ListMvpPresenter, ListMvpView>(), ListMvpV
             state.listPage = 0
         } else {
             showFeed()
-            state = savedInstanceState.getParcelable("state")
+            state = savedInstanceState.getSerializable("state") as UiFeedView
             addItems(state.listItems)
         }
     }
@@ -82,16 +78,10 @@ class ListEventFragment : MvpFragment<ListMvpPresenter, ListMvpView>(), ListMvpV
 
     override fun onResume() {
         super.onResume()
-        presenter?.onViewAttached(this)
-        if(state.state == 0) {
+        if(state.state == ViewState.STATE_LOADING) {
             presenter?.requestNext(true)
-            state.state = 1
+            state.state = ViewState.STATE_CONTENT
         }
-    }
-
-    override fun onPause() {
-        presenter?.onViewDetached()
-        super.onPause()
     }
 
 
@@ -127,6 +117,12 @@ class ListEventFragment : MvpFragment<ListMvpPresenter, ListMvpView>(), ListMvpV
 
     override fun clearItems() {
         (feedList.adapter as EventsAdapter).clear()
+    }
+
+    fun startDetailActivity(position: Int) {
+        val intent = Intent(context, DetailActivity::class.java)
+        intent.putExtra("event", feedAdapter?.getItem(position))
+        startActivity(intent)
     }
 
 }

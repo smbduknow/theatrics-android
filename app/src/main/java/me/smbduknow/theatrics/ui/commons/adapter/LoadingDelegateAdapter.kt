@@ -4,8 +4,11 @@ import android.support.v7.widget.RecyclerView
 import android.view.ViewGroup
 import me.smbduknow.theatrics.R
 import me.smbduknow.theatrics.ui.commons.inflate
+import me.smbduknow.theatrics.ui.model.UiLoader
 
 class LoadingDelegateAdapter : ViewModelDelegateAdapter {
+
+    override fun isForViewType(item: ViewModel, position: Int) = item is UiLoader
 
     override fun onCreateViewHolder(parent: ViewGroup) = ViewHolder(parent)
 

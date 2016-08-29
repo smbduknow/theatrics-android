@@ -12,28 +12,31 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/image_height_detail"
         android:fitsSystemWindows="@bool/fit_system_window"
-        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+        android:theme="@style/AppTheme.AppBarOverlay.Dark">
         <android.support.design.widget.CollapsingToolbarLayout
             android:id="@+id/detail_collapsing_toolbar"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:fitsSystemWindows="@bool/fit_system_window"
             android:background="@color/gray_dc"
-            app:contentScrim="?attr/colorPrimary"
-            app:layout_scrollFlags="scroll|exitUntilCollapsed">
+            app:contentScrim="?attr/colorPrimaryDark"
+            app:expandedTitleTextAppearance="@style/AppTheme.TransparentText"
+            app:layout_scrollFlags="scroll|exitUntilCollapsed|snap">
             <FrameLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:fitsSystemWindows="@bool/fit_system_window"
                 app:layout_collapseMode="parallax">
                 <ImageView
+                    android:id="@+id/detail_image"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:scaleType="centerCrop"
                     android:src="@color/gray_dc"/>
             </FrameLayout>
 
             <android.support.v7.widget.Toolbar
-                android:id="@+id/toolbar"
+                android:id="@+id/detail_toolbar"
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
                 app:layout_collapseMode="pin" />
@@ -53,6 +56,14 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/white">
+
+            <!-- TODO create style -->
+            <TextView
+                android:id="@+id/detail_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/font_title"
+                />
 
         </LinearLayout>
     </android.support.v4.widget.NestedScrollView>

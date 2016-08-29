@@ -14,10 +14,12 @@ import java.util.concurrent.TimeUnit
 
 class EventListPresenter : BaseMvpPresenter<ListMvpView>(),ListMvpPresenter {
 
+    private var isLoading = false
+
     private var page = 1
 
     override fun requestNext(refresh: Boolean) {
-        if(subscription != null) return
+        if(isLoading) return
 
         if(refresh) {
             view?.showLoader()
@@ -30,15 +32,15 @@ class EventListPresenter : BaseMvpPresenter<ListMvpView>(),ListMvpPresenter {
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(
                         { handleResponse(it) },
-                        { handleError(it) },
-                        { subscription = null }
+                        { handleError(it) }
                 )
-
+        isLoading = true
     }
 
     private fun handleResponse(response: ApiListResponse<ApiFeedItem>) {
         view?.addItems(response.items.map {
             UiEvent(
+                    it.id,
                     it.title,
                     it.type,
                     it.description,
@@ -46,11 +48,15 @@ class EventListPresenter : BaseMvpPresenter<ListMvpView>(),ListMvpPresenter {
         })
         view?.showFeed()
         page++
+
+        isLoading = false
     }
 
     private fun handleError(error: Throwable) {
         view?.showEmptyView()
         if(BuildConfig.DEBUG) error.printStackTrace()
+
+        isLoading = false
     }
 
 }

@@ -8,7 +8,7 @@ import me.smbduknow.theatrics.R
 
 class SpaceItemDecorator(
         val orientation: Int,
-        @DimenRes val dimenSpaceRes: Int = R.dimen.margin_normal
+        @DimenRes val dimenSpaceRes: Int = R.dimen.space_normal
 ) : RecyclerView.ItemDecoration() {
 
     companion object {

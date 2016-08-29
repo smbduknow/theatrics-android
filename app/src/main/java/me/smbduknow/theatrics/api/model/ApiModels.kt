@@ -25,7 +25,7 @@ class ApiFeedItem(
         val description: String,
         val images: List<ApiImage>
 ) : ApiItem(id, type) {
-    fun getTitleImage() = images[0].thumbnails.medium
+    fun getTitleImage() = if (!images.isEmpty()) images[0].thumbnails.medium else ""
 }
 
 

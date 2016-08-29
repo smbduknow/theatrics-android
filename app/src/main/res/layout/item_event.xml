@@ -23,7 +23,7 @@
             android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="@dimen/margin_large">
+            android:padding="@dimen/space_large">
             <TextView
                 android:id="@+id/title"
                 android:layout_width="wrap_content"
@@ -37,7 +37,7 @@
                 android:id="@+id/description"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/margin_small"
+                android:layout_marginTop="@dimen/space_small"
                 android:maxLines="3"
                 android:ellipsize="end"
                 android:textColor="@color/text_primary"

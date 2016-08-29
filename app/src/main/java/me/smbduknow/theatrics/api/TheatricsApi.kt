@@ -9,7 +9,6 @@ import rx.Observable
 
 interface TheatricsApi {
 
-
     @GET("/api/v1/events/")
     fun getEvents(
             @Query("page_size") limit: Int,
@@ -18,7 +17,7 @@ interface TheatricsApi {
 
     @GET("/api/v1/events/{id}/")
     fun getEvent(
-            @Path("id") id: Int
+            @Path("id") id: Long
     ) : Observable<ApiFeedItem>
 
 

@@ -12,7 +12,7 @@
             android:id="@+id/feed_list"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:padding="@dimen/margin_normal"
+            android:padding="@dimen/space_normal"
             android:clipToPadding="false"/>
     </android.support.v4.widget.SwipeRefreshLayout>
 

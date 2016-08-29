@@ -8,6 +8,7 @@ import me.smbduknow.theatrics.ui.commons.adapter.LoadingDelegateAdapter
 import me.smbduknow.theatrics.ui.commons.adapter.ViewModel
 import me.smbduknow.theatrics.ui.commons.adapter.ViewModelDelegateAdapter
 import me.smbduknow.theatrics.ui.model.UiEvent
+import me.smbduknow.theatrics.ui.model.UiLoader
 import java.util.*
 
 class EventsAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
@@ -20,9 +21,7 @@ class EventsAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     private var items: ArrayList<ViewModel>
     private var delegateAdapters = SparseArrayCompat<ViewModelDelegateAdapter>()
 
-    private val loadingItem = object : ViewModel {
-        override fun getViewType() = LOADING
-    }
+    private val loadingItem = UiLoader()
 
     init {
         delegateAdapters.put(LOADING, LoadingDelegateAdapter())
@@ -32,7 +31,18 @@ class EventsAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     override fun getItemCount() = items.size
 
-    override fun getItemViewType(position: Int) = items.get(position).getViewType()
+    override fun getItemViewType(position: Int): Int {
+        val delegatesCount = delegateAdapters.size()
+        for (i in 0..delegatesCount - 1) {
+            val delegate = delegateAdapters.valueAt(i)
+            if (delegate.isForViewType(items[position], position)) {
+                return delegateAdapters.keyAt(i)
+            }
+        }
+
+        throw NullPointerException(
+                "No AdapterDelegate added that matches position=$position in data source")
+    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         return delegateAdapters.get(viewType).onCreateViewHolder(parent)
@@ -69,10 +79,14 @@ class EventsAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     }
 
     fun getItems(): ArrayList<UiEvent> {
-        return  items
-                .filter { it.getViewType() == ITEM_EVENT }
+        return items
+                .filter { it is UiEvent }
                 .map { it as UiEvent }
                 as ArrayList<UiEvent>
+    }
+
+    fun getItem(position: Int): ViewModel {
+        return items[position]
     }
 
     private fun getLastPosition() = if (items.lastIndex == -1) 0 else items.lastIndex
