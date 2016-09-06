@@ -2,15 +2,18 @@ apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 
-buildscript {
-    ext.kotlin_version = '1.0.3'
-    repositories {
-        jcenter()
-    }
-    dependencies {
-        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
-        classpath "org.jetbrains.kotlin:kotlin-android-extensions:$kotlin_version"
-    }
+def versionMajor = 1
+def versionMinor = 0
+def versionPatch = 0
+
+def buildVersionCode = {
+    return versionMajor * 10000 + versionMinor * 100 + versionPatch
+}
+
+def buildVersionName = {
+    String versionName = "$versionMajor.$versionMinor"
+    if(versionPatch != null && versionPatch > 0) versionName +=".$versionPatch"
+    return versionName
 }
 
 android {
@@ -19,10 +22,12 @@ android {
 
     defaultConfig {
         applicationId "me.smbduknow.theatrics"
+        versionCode buildVersionCode()
+        versionName buildVersionName()
         minSdkVersion 16
         targetSdkVersion 24
-        versionCode 1
-        versionName "1.0"
+
+        vectorDrawables.useSupportLibrary = true
     }
     buildTypes {
         release {
@@ -37,11 +42,15 @@ android {
 
 dependencies {
 
-    final supportLibraryVersion = '24.1.1'
+    final supportLibraryVersion = '24.2.0'
 
-    final okhttpVersion = '3.2.0'
-    final retrofitVersion = '2.0.2'
-    final picassoVersion = '2.5.2'
+    final ioOkhttpVersion = '3.2.0'
+    final ioRetrofitVersion = '2.0.2'
+    final ioPicassoVersion = '2.5.2'
+
+
+    final rxJavaVersion = '1.1.6'
+    final rxAndroidVersion = '1.2.1'
 
     testCompile 'junit:junit:4.12'
 
@@ -54,23 +63,17 @@ dependencies {
     compile "com.android.support:cardview-v7:$supportLibraryVersion"
     compile "com.android.support:design:$supportLibraryVersion"
 
-    compile "com.squareup.retrofit2:retrofit:2.0.0"
-    compile "com.squareup.retrofit2:converter-moshi:2.0.0"
-
     //io (squareup)
-    compile "com.squareup.okhttp3:okhttp:$okhttpVersion"
-    compile "com.squareup.okhttp3:logging-interceptor:$okhttpVersion"
+    compile "com.squareup.okhttp3:okhttp:$ioOkhttpVersion"
+    compile "com.squareup.okhttp3:logging-interceptor:$ioOkhttpVersion"
 
-    compile ("com.squareup.retrofit2:retrofit:$retrofitVersion") { exclude module: 'okhttp' }
-    compile "com.squareup.retrofit2:converter-moshi:$retrofitVersion"
-    compile "com.squareup.retrofit2:adapter-rxjava:$retrofitVersion"
+    compile ("com.squareup.retrofit2:retrofit:$ioRetrofitVersion") { exclude module: 'okhttp' }
+    compile "com.squareup.retrofit2:converter-moshi:$ioRetrofitVersion"
+    compile "com.squareup.retrofit2:adapter-rxjava:$ioRetrofitVersion"
 
-    compile "com.squareup.picasso:picasso:$picassoVersion"
+    compile "com.squareup.picasso:picasso:$ioPicassoVersion"
 
     //rx
-    compile "io.reactivex:rxjava:1.1.6"
-    compile "io.reactivex:rxandroid:1.2.1"
-}
-repositories {
-    mavenCentral()
+    compile "io.reactivex:rxjava:$rxJavaVersion"
+    compile "io.reactivex:rxandroid:$rxAndroidVersion"
 }
