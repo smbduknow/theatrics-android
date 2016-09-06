@@ -17,9 +17,7 @@ class SpaceItemDecorator(
     }
 
     override fun getItemOffsets(outRect: Rect, view: View, parent: RecyclerView, state: RecyclerView.State?) {
-        val pos = parent.getChildAdapterPosition(view)
-        val space = view.context.resources.getDimensionPixelSize(dimenSpaceRes);
-        if (pos <= 0) return
+        val space = view.context.resources.getDimensionPixelSize(dimenSpaceRes)
         when (orientation) {
             VERTICAL ->  outRect.top = space
             HORIZONTAL -> outRect.left = space
