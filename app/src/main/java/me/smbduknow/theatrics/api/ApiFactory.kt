@@ -36,37 +36,4 @@ object ApiFactory {
 
     fun getApi() : TheatricsApi = getRetrofit().create(TheatricsApi::class.java)
 
-
-
-    // TODO use mockito
-    fun getDummyApi() : TheatricsApi = object : TheatricsApi {
-
-        override fun getEvent(id: Long): Observable<ApiFeedItem> {
-            return Observable.just(ApiFeedItem(
-                    id, "event",
-                    "Dummy Event",
-                    "Dummy Event the Play",
-                    "Very nice Dummy Event for all ages",
-                    "Description of Dummy Event\nIt may be very long but not this time... Sorry",
-                    emptyList()
-            ))
-        }
-
-        override fun getEvents(limit: Int, offset: Int): Observable<ApiListResponse<ApiFeedItem>> {
-            return Observable.just(ApiListResponse(
-                    "", 20, "", 40, Collections.nCopies(20,
-                    ApiFeedItem(
-                            1, "event",
-                            "Dummy Event",
-                            "Dummy Event the Play",
-                            "Very nice Dummy Event for all ages",
-                            "Description of Dummy Event\nIt may be very long but not this time... Sorry",
-                            emptyList()
-                    ))
-            ))
-
-        }
-
-    }
-
 }

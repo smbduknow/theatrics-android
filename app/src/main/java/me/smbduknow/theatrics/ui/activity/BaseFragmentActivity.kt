@@ -9,7 +9,7 @@ import android.support.v7.app.AppCompatActivity
 abstract class BaseFragmentActivity : AppCompatActivity() {
 
     fun changeFragment(@IdRes container: Int, f: Fragment, cleanStack: Boolean = false) {
-        val ft = supportFragmentManager.beginTransaction();
+        val ft = supportFragmentManager.beginTransaction()
         if (cleanStack) {
             clearBackStack()
         }

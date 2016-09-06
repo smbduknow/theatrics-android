@@ -17,7 +17,7 @@ import me.smbduknow.theatrics.ui.adapter.EventsAdapter
 import me.smbduknow.theatrics.ui.commons.InfiniteScrollListener
 import me.smbduknow.theatrics.ui.commons.SpaceItemDecorator
 import me.smbduknow.theatrics.ui.commons.inflate
-import me.smbduknow.theatrics.ui.model.UiEvent
+import me.smbduknow.theatrics.ui.model.UiFeedEvent
 import me.smbduknow.theatrics.ui.model.UiFeedView
 import me.smbduknow.theatrics.ui.model.ViewState
 
@@ -111,7 +111,7 @@ class ListEventFragment : MvpFragment<ListMvpPresenter, ListMvpView>(), ListMvpV
         throw UnsupportedOperationException("not implemented")
     }
 
-    override fun addItems(items: List<UiEvent>) {
+    override fun addItems(items: List<UiFeedEvent>) {
         (feedList.adapter as EventsAdapter).addItems(items)
     }
 

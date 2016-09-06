@@ -7,7 +7,7 @@ import me.smbduknow.theatrics.api.model.ApiListResponse
 import me.smbduknow.theatrics.mvp.BaseMvpPresenter
 import me.smbduknow.theatrics.mvp.ListMvpPresenter
 import me.smbduknow.theatrics.mvp.ListMvpView
-import me.smbduknow.theatrics.ui.model.UiEvent
+import me.smbduknow.theatrics.ui.model.UiFeedEvent
 import rx.android.schedulers.AndroidSchedulers
 import rx.schedulers.Schedulers
 import java.util.concurrent.TimeUnit
@@ -39,7 +39,7 @@ class EventListPresenter : BaseMvpPresenter<ListMvpView>(),ListMvpPresenter {
 
     private fun handleResponse(response: ApiListResponse<ApiFeedItem>) {
         view?.addItems(response.items.map {
-            UiEvent(
+            UiFeedEvent(
                     it.id,
                     it.title,
                     it.type,

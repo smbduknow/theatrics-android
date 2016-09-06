@@ -1,10 +1,10 @@
 package me.smbduknow.theatrics.mvp
 
-import me.smbduknow.theatrics.ui.model.UiEvent
+import me.smbduknow.theatrics.ui.model.UiFeedEvent
 
 interface DetailMvpPresenter : MvpPresenter<DetailMvpView> {
 
-    fun requestDetail(event: UiEvent)
+    fun requestDetail(event: UiFeedEvent)
 }
 
 interface DetailMvpView : MvpView {
@@ -16,5 +16,8 @@ interface DetailMvpView : MvpView {
     fun setTitle(title: String)
     fun setImage(image: String)
 
-    fun setDescription(description: String)
+    fun setDescription(description: String,
+                       place: String,
+                       runningTime: String
+    )
 }

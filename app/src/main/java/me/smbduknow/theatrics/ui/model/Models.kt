@@ -7,7 +7,7 @@ import java.util.*
 class UiLoader() : ViewModel
 
 
-class UiEvent(
+class UiFeedEvent(
         val id: Long,
         val title: String,
         val type: String,
@@ -25,11 +25,11 @@ object ViewState {
 class UiFeedView (
         var state: Int,
         var listPage: Int,
-        var listItems: ArrayList<UiEvent> = ArrayList()
+        var listItems: ArrayList<UiFeedEvent> = ArrayList()
 ) : ViewModel
 
 
 class UiDetailView(
         var state: Int,
-        var detailItem: UiEvent? = null
+        var detailItem: UiFeedEvent? = null
 ) : ViewModel

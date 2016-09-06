@@ -1,6 +1,6 @@
 package me.smbduknow.theatrics.mvp
 
-import me.smbduknow.theatrics.ui.model.UiEvent
+import me.smbduknow.theatrics.ui.model.UiFeedEvent
 
 interface ListMvpPresenter : MvpPresenter<ListMvpView> {
 
@@ -15,6 +15,6 @@ interface ListMvpView : MvpView {
 
     fun showPageLoader(visible: Boolean = true)
 
-    fun addItems(items : List<UiEvent>)
+    fun addItems(items : List<UiFeedEvent>)
     fun clearItems()
 }

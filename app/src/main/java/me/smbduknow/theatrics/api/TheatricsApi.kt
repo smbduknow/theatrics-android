@@ -1,5 +1,6 @@
 package me.smbduknow.theatrics.api
 
+import me.smbduknow.theatrics.api.model.ApiDetailItem
 import me.smbduknow.theatrics.api.model.ApiFeedItem
 import me.smbduknow.theatrics.api.model.ApiListResponse
 import retrofit2.http.GET
@@ -15,10 +16,10 @@ interface TheatricsApi {
             @Query("page") offset: Int
     ) : Observable<ApiListResponse<ApiFeedItem>>
 
-    @GET("/api/v1/events/{id}/")
+    @GET("/api/v1/events/{id}/?expand=place")
     fun getEvent(
             @Path("id") id: Long
-    ) : Observable<ApiFeedItem>
+    ) : Observable<ApiDetailItem>
 
 
 //    @GET("/api/v1/places/")

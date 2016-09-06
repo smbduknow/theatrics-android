@@ -23,15 +23,12 @@
             android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="@dimen/space_large">
+            style="@style/AppTheme.PaddingLayout">
             <TextView
                 android:id="@+id/title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:maxLines="2"
-                android:ellipsize="end"
-                android:textColor="@color/text_title"
-                android:textSize="@dimen/font_title"
+                style="@style/AppTheme.FeedTitle"
                 tools:text="This should be a long title like lorem ipsum but much longer" />
             <TextView
                 android:id="@+id/description"
@@ -40,8 +37,7 @@
                 android:layout_marginTop="@dimen/space_small"
                 android:maxLines="3"
                 android:ellipsize="end"
-                android:textColor="@color/text_primary"
-                android:textSize="@dimen/font_normal"
+                style="@style/AppTheme.Text"
                 tools:text="Long and useless description" />
         </LinearLayout>
 

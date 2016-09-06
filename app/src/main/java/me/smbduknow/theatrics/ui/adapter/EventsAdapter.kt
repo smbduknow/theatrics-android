@@ -7,7 +7,7 @@ import me.smbduknow.theatrics.ui.adapter.delegate.EventsDelegateAdapter
 import me.smbduknow.theatrics.ui.commons.adapter.LoadingDelegateAdapter
 import me.smbduknow.theatrics.ui.commons.adapter.ViewModel
 import me.smbduknow.theatrics.ui.commons.adapter.ViewModelDelegateAdapter
-import me.smbduknow.theatrics.ui.model.UiEvent
+import me.smbduknow.theatrics.ui.model.UiFeedEvent
 import me.smbduknow.theatrics.ui.model.UiLoader
 import java.util.*
 
@@ -54,7 +54,7 @@ class EventsAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
 
 
-    fun addItems(events: List<UiEvent>) {
+    fun addItems(events: List<UiFeedEvent>) {
         if(!items.isEmpty()) {
             val initPosition = items.size - 1
             items.removeAt(initPosition)
@@ -78,11 +78,11 @@ class EventsAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
         }
     }
 
-    fun getItems(): ArrayList<UiEvent> {
+    fun getItems(): ArrayList<UiFeedEvent> {
         return items
-                .filter { it is UiEvent }
-                .map { it as UiEvent }
-                as ArrayList<UiEvent>
+                .filter { it is UiFeedEvent }
+                .map { it as UiFeedEvent }
+                as ArrayList<UiFeedEvent>
     }
 
     fun getItem(position: Int): ViewModel {
