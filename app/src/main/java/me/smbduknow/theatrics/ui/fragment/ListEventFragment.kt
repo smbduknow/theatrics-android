@@ -21,7 +21,6 @@ import me.smbduknow.theatrics.ui.model.UiFeedEvent
 import me.smbduknow.theatrics.ui.model.UiFeedView
 import me.smbduknow.theatrics.ui.model.ViewState
 
-
 class ListEventFragment : MvpFragment<ListMvpPresenter, ListMvpView>(), ListMvpView {
 
     private val feedLoader by lazy { feed_loader }
@@ -50,7 +49,7 @@ class ListEventFragment : MvpFragment<ListMvpPresenter, ListMvpView>(), ListMvpV
         feedList.apply {
             setHasFixedSize(true)
             layoutManager = linearLayout
-            addItemDecoration(SpaceItemDecorator(SpaceItemDecorator.Companion.VERTICAL))
+            addItemDecoration(SpaceItemDecorator(SpaceItemDecorator.VERTICAL))
             clearOnScrollListeners()
             addOnScrollListener(InfiniteScrollListener(linearLayout, { presenter?.requestNext() } ))
             adapter = feedAdapter

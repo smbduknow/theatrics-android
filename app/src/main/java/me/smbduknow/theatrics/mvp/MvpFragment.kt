@@ -23,21 +23,19 @@ abstract class MvpFragment<P : MvpPresenter<V>, V : MvpView> : Fragment(), MvpVi
     }
 
     override fun onLoadFinished(loader: Loader<P>, presenter: P) {
-        if(this.presenter == null) this.presenter = presenter
+        if(this.presenter == null) {
+            this.presenter = presenter
+            this.presenter?.onViewAttached(this as V)
+        }
     }
 
     override fun onLoaderReset(loader: Loader<P>) {
         presenter = null
     }
 
-    override fun onResume() {
-        super.onResume()
-        presenter?.onViewAttached(this as V)
-    }
-
-    override fun onPause() {
+    override fun onDestroyView() {
         presenter?.onViewDetached()
-        super.onPause()
+        super.onDestroyView()
     }
 
 }
