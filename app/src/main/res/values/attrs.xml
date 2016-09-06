@@ -6,6 +6,7 @@
         <attr name="compatDrawableTop" format="reference"/>
         <attr name="compatDrawableEnd" format="reference"/>
         <attr name="compatDrawableBottom" format="reference"/>
+        <attr name="compatTintColor" format="reference"/>
     </declare-styleable>
 
 </resources>

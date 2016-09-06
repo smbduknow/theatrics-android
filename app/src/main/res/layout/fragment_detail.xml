@@ -22,6 +22,7 @@
         android:gravity="center_vertical"
         android:drawablePadding="@dimen/space_large"
         app:compatDrawableStart="@drawable/ic_place_black_18dp"
+        app:compatTintColor="@color/gray_42"
         tools:text="Place Name"/>
 
     <me.smbduknow.theatrics.ui.commons.CompatTextView
@@ -31,6 +32,7 @@
         android:gravity="center_vertical"
         android:drawablePadding="@dimen/space_large"
         app:compatDrawableStart="@drawable/ic_access_time_black_18dp"
+        app:compatTintColor="@color/gray_42"
         tools:text="2 hr 3 min"/>
 
     <TextView
