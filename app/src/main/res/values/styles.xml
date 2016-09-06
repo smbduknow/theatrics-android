@@ -5,14 +5,58 @@
         <item name="android:layout_height">wrap_content</item>
         <item name="android:background">@color/white</item>
         <item name="cardBackgroundColor">@color/white</item>
-        <item name="cardCornerRadius">1dp</item>
+        <item name="cardCornerRadius">2dp</item>
         <item name="contentPadding">0dp</item>
         <item name="cardUseCompatPadding">true</item>
         <item name="cardPreventCornerOverlap">false</item>
+        <item name="android:layout_marginLeft">@dimen/space_negative_normal</item>
+        <item name="android:layout_marginRight">@dimen/space_negative_normal</item>
     </style>
 
     <style name="AppTheme.TransparentText" parent="@android:style/TextAppearance">
         <item name="android:textColor">@color/transparent_white</item>
     </style>
+
+
+    <!-- LAYOUT -->
+
+    <style name="AppTheme.Layout"/>
+
+    <style name="AppTheme.Layout.WithDivider">
+        <item name="android:divider">@drawable/space_normal</item>
+        <item name="android:showDividers">middle</item>
+    </style>
+
+    <style name="AppTheme.PaddingLayout" parent="AppTheme.Layout">
+        <item name="android:padding">@dimen/space_large</item>
+    </style>
+
+    <style name="AppTheme.PaddingLayout.WithDivider">
+        <item name="android:divider">@drawable/space_normal</item>
+        <item name="android:showDividers">middle</item>
+    </style>
+    <!-- TEXT -->
+
+    <style name="AppTheme.Text">
+        <item name="android:textSize">@dimen/font_normal</item>
+        <item name="android:textColor">@color/text_primary</item>
+    </style>
+
+    <style name="AppTheme.Title">
+        <item name="android:textSize">@dimen/font_title</item>
+        <item name="android:textColor">@color/text_title</item>
+    </style>
+
+
+    <style name="AppTheme.FeedTitle" parent="AppTheme.Title">
+        <item name="android:maxLines">2</item>
+        <item name="android:ellipsize">end</item>
+    </style>
+
+    <style name="AppTheme.DetailTitle">
+        <item name="android:textSize">@dimen/font_huge</item>
+    </style>
+
+
 
 </resources>
