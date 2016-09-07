@@ -1,9 +1,7 @@
 package me.smbduknow.theatrics.ui.activity
 
-import android.os.Build
 import android.os.Bundle
 import android.view.MenuItem
-import android.view.WindowManager
 import kotlinx.android.synthetic.main.activity_detail.*
 import me.smbduknow.theatrics.R
 import me.smbduknow.theatrics.ui.commons.loadImg
@@ -22,11 +20,6 @@ class DetailActivity : BaseFragmentActivity() {
 
         setSupportActionBar(mToolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
-
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)
-            window.statusBarColor = resources.getColor(R.color.transparent_black)
-        }
 
         if (savedInstanceState == null) {
             changeFragment(R.id.detail_scroll_view, DetailEventFragment.newInstance(intent.extras))

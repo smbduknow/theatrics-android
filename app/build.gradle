@@ -2,47 +2,76 @@ apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 
-def versionMajor = 1
-def versionMinor = 0
-def versionPatch = 0
+ext {
+    versionMajor = 1
+    versionMinor = 0
+    versionPatch = 0
 
-def buildVersionCode = {
-    return versionMajor * 10000 + versionMinor * 100 + versionPatch
-}
+    buildVersionCode = {
+        return versionMajor * 10000 + versionMinor * 100 + versionPatch
+    }
 
-def buildVersionName = {
-    String versionName = "$versionMajor.$versionMinor"
-    if(versionPatch != null && versionPatch > 0) versionName +=".$versionPatch"
-    return versionName
+    buildVersionName = {
+        String versionName = "$versionMajor.$versionMinor"
+        if(versionPatch != null && versionPatch > 0) versionName +=".$versionPatch"
+        return versionName
+    }
 }
 
 android {
-    compileSdkVersion 24
-    buildToolsVersion "24.0.0"
+    compileSdkVersion 23
+    buildToolsVersion "24.0.2"
 
     defaultConfig {
         applicationId "me.smbduknow.theatrics"
         versionCode buildVersionCode()
         versionName buildVersionName()
         minSdkVersion 16
-        targetSdkVersion 24
+        targetSdkVersion 23
 
         vectorDrawables.useSupportLibrary = true
     }
-    buildTypes {
-        release {
-            minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-        }
-    }
+
     sourceSets {
         main.java.srcDirs += 'src/main/kotlin'
+    }
+
+    signingConfigs {
+        try {
+            config_debug {
+                keyAlias DEBUG_KEY_ALIAS
+                keyPassword DEBUG_KEY_PASSWORD
+                storeFile file(DEBUG_STORE_PATH)
+                storePassword DEBUG_STORE_PASSWORD
+            }
+            config_release {
+                keyAlias RELEASE_KEY_ALIAS
+                keyPassword RELEASE_KEY_PASSWORD
+                storeFile file(RELEASE_STORE_PATH)
+                storePassword RELEASE_STORE_PASSWORD
+            }
+        } catch (ignored) {
+            throw new InvalidUserDataException("Need to define signing configs in app/gradle.properties.")
+        }
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.config_release
+        }
+        debug {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.config_release
+        }
     }
 }
 
 dependencies {
 
-    final supportLibraryVersion = '24.2.0'
+    final supportLibraryVersion = '23.2.1'
 
     final ioOkhttpVersion = '3.2.0'
     final ioRetrofitVersion = '2.0.2'

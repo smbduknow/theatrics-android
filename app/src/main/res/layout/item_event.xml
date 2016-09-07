@@ -17,7 +17,7 @@
             android:layout_width="match_parent"
             android:layout_height="160dp"
             android:scaleType="centerCrop"
-            android:src="@color/gray_77"/>
+            android:src="@drawable/pic_placeholder"/>
 
         <LinearLayout
             android:orientation="vertical"

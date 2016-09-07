@@ -1,4 +1,4 @@
 /build
 *.apk
-/local.properties
+/gradle.properties
 /google-services.json

@@ -16,7 +16,7 @@ fun ViewGroup.inflate(layoutId: Int, attachToRoot: Boolean = false): View {
 
 fun ImageView.loadImg(imageUrl: String) {
     if (TextUtils.isEmpty(imageUrl)) {
-        Picasso.with(context).load(R.color.gray_77).into(this)
+        Picasso.with(context).load(R.drawable.pic_placeholder).into(this)
     } else {
         Picasso.with(context).load(imageUrl).into(this)
     }
