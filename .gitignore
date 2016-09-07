@@ -7,7 +7,3 @@
 /captures
 libs/
 /gen
-src/main/java/me/smbduknow/kedditkotlin/NewsFragment.kt
-src/main/java/me/smbduknow/kedditkotlin/commons/
-src/main/res/layout/item_news.xml
-src/main/res/layout/news_fragment.xml
