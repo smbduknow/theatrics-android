@@ -35,6 +35,8 @@
         <item name="android:divider">@drawable/space_normal</item>
         <item name="android:showDividers">middle</item>
     </style>
+
+
     <!-- TEXT -->
 
     <style name="AppTheme.Text">
@@ -57,6 +59,22 @@
         <item name="android:textSize">@dimen/font_huge</item>
     </style>
 
+
+    <style name="AppTheme.DetailMeta">
+        <item name="android:textColor">@color/text_primary</item>
+        <item name="android:textSize">@dimen/font_normal</item>
+        <item name="android:gravity">start|center_vertical</item>
+        <item name="android:drawablePadding">@dimen/space_large</item>
+        <item name="compatTintColor">@color/text_primary</item>
+    </style>
+
+    <style name="AppTheme.DetailMeta.Extra">
+        <item name="android:textColor">@color/text_secondary</item>
+        <item name="android:textSize">@dimen/font_small</item>
+        <item name="android:gravity">start</item>
+        <item name="android:layout_marginLeft">@dimen/icon_size_normal</item>
+        <item name="android:paddingLeft">@dimen/space_large</item>
+    </style>
 
 
 </resources>

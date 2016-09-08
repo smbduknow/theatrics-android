@@ -3,8 +3,10 @@ package me.smbduknow.theatrics.ui.fragment
 import android.os.Bundle
 import android.text.Html
 import android.view.LayoutInflater
+import android.view.TextureView
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import kotlinx.android.synthetic.main.fragment_detail.*
 import me.smbduknow.theatrics.R
 import me.smbduknow.theatrics.mvp.DetailMvpPresenter
@@ -18,11 +20,6 @@ import me.smbduknow.theatrics.ui.model.UiFeedEvent
 import me.smbduknow.theatrics.ui.model.ViewState
 
 class DetailEventFragment : MvpFragment<DetailMvpPresenter, DetailMvpView>(), DetailMvpView {
-
-    private val mTitle by lazy { detail_title }
-    private val mDescription by lazy { detail_description}
-    private val mPlace by lazy { detail_place }
-    private val mRunningTime by lazy { detail_running_time }
 
     private var state = UiDetailView(ViewState.STATE_LOADING)
 
@@ -61,19 +58,46 @@ class DetailEventFragment : MvpFragment<DetailMvpPresenter, DetailMvpView>(), De
 
     override fun setTitle(title: String) {
         activity.title = title
-        mTitle.text = title
+        detail_title.text = title
     }
 
     override fun setImage(image: String) {
         (activity as DetailActivity).setCollapsingImage(image)
     }
 
-    override fun setDescription(description: String,
-                                place: String,
-                                runningTime: String) {
-        mDescription.text = Html.fromHtml(description).trim('\n')
-        mPlace.text = place
-        mRunningTime.text = runningTime
+    override fun setDetailedInfo(description: String,
+                                 tagline: String,
+                                 place: String,
+                                 address: String,
+                                 price: String,
+                                 date: String,
+                                 dateExtra: String,
+                                 runningTime: String) {
+        detail_description.text = Html.fromHtml(description).trim('\n')
+        setViewText(detail_tagline_text, Html.fromHtml(tagline).trim('\n'))
+        setViewText(detail_price, price)
+        setViewText(detail_running_time, runningTime)
+        setViewExtraText(detail_place, detail_place_address, place, address)
+        setViewExtraText(detail_date, detail_date_time, date, dateExtra)
+    }
+
+    private fun setViewText(tv: TextView, s: CharSequence) {
+        if(s.isEmpty()) {
+            tv.visibility = View.GONE
+        } else {
+            tv.visibility = View.VISIBLE
+            tv.text = s
+        }
+    }
+
+    private fun setViewExtraText(tv: TextView, tvExtra: TextView, s: CharSequence, sExtra: CharSequence) {
+        if(s.isEmpty()) {
+            (tv.parent as View).visibility = View.GONE
+        } else {
+            (tv.parent as View).visibility = View.VISIBLE
+            tv.text = s
+            setViewText(tvExtra, sExtra)
+        }
     }
 
 }
