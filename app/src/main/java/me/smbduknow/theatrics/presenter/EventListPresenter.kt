@@ -7,12 +7,17 @@ import me.smbduknow.theatrics.api.model.ApiListResponse
 import me.smbduknow.theatrics.mvp.BaseMvpPresenter
 import me.smbduknow.theatrics.mvp.ListMvpPresenter
 import me.smbduknow.theatrics.mvp.ListMvpView
+import me.smbduknow.theatrics.ui.commons.format
 import me.smbduknow.theatrics.ui.model.UiFeedEvent
 import rx.android.schedulers.AndroidSchedulers
 import rx.schedulers.Schedulers
+import java.text.SimpleDateFormat
+import java.util.*
 import java.util.concurrent.TimeUnit
 
 class EventListPresenter : BaseMvpPresenter<ListMvpView>(),ListMvpPresenter {
+
+    private val sdf = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss", Locale.getDefault())
 
     private var isLoading = false
 
@@ -39,11 +44,14 @@ class EventListPresenter : BaseMvpPresenter<ListMvpView>(),ListMvpPresenter {
 
     private fun handleResponse(response: ApiListResponse<ApiFeedItem>) {
         view?.addItems(response.items.map {
+            val date = sdf.parse(it.dates[0].start)
             UiFeedEvent(
                     it.id,
                     it.title,
                     it.type,
                     it.description,
+                    date.format("dd"),
+                    date.format("LLLL").substring(0..2),
                     it.getTitleImage())
         })
         view?.showFeed()

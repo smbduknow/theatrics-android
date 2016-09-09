@@ -12,33 +12,82 @@
         android:layout_height="wrap_content"
         android:background="@color/white">
 
-        <ImageView
-            android:id="@+id/image"
+        <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="160dp"
-            android:scaleType="centerCrop"
-            android:src="@drawable/pic_placeholder"/>
-
-        <LinearLayout
-            android:orientation="vertical"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            style="@style/AppTheme.PaddingLayout">
+            android:layout_height="@dimen/image_height_feed">
+            <ImageView
+                android:id="@+id/item_image"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="centerCrop"
+                android:src="@drawable/pic_placeholder"/>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/overlay_shadow_feed"/>
             <TextView
-                android:id="@+id/title"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                style="@style/AppTheme.FeedTitle"
-                tools:text="This should be a long title like lorem ipsum but much longer" />
-            <TextView
-                android:id="@+id/description"
+                android:id="@+id/item_title"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/space_small"
-                android:maxLines="3"
+                android:layout_gravity="bottom"
+                android:padding="@dimen/space_large"
+                android:textColor="@color/white"
+                android:shadowColor="@color/black"
+                android:shadowRadius="10"
+                style="@style/AppTheme.FeedTitle"
+                tools:text="This should be a long title like lorem ipsum but much longer" />
+        </FrameLayout>
+
+
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:paddingLeft="@dimen/space_large"
+                android:paddingRight="@dimen/space_large"
+                android:paddingTop="@dimen/space_small"
+                android:paddingBottom="@dimen/space_normal"
+                android:layout_gravity="center"
+                android:background="@color/gray_42">
+                <TextView
+                    android:id="@+id/item_date"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/font_huge"
+                    android:text="22"/>
+                <TextView
+                    android:id="@+id/item_month"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/space_negative_small"
+                    android:gravity="center"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/font_small"
+                    android:textAllCaps="true"
+                    android:text="OCT"/>
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/item_place"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:paddingLeft="@dimen/space_large"
+                android:paddingRight="@dimen/space_large"
+                android:paddingTop="@dimen/space_normal"
+                android:paddingBottom="@dimen/space_normal"
+                android:gravity="center_vertical"
+                android:maxLines="2"
                 android:ellipsize="end"
                 style="@style/AppTheme.Text"
-                tools:text="Long and useless description" />
+                tools:text="Long and useless place name" />
         </LinearLayout>
 
 

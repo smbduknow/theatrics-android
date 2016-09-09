@@ -27,9 +27,11 @@ class EventsDelegateAdapter : ViewModelDelegateAdapter {
     class ViewHolder(parent: ViewGroup) : RecyclerView.ViewHolder(parent.inflate(R.layout.item_event)) {
         fun bind(item: UiFeedEvent, position: Int, listener: (position: Int) -> Unit) {
             with(itemView) {
-                title.text = item.title.capitalize()
-                description.text = Html.fromHtml(item.description.trim().capitalize())
-                image.loadImg(item.image)
+                item_title.text = item.title.capitalize()
+                item_place.text = Html.fromHtml(item.place.trim().capitalize())
+                item_date.text = item.date
+                item_month.text = item.month
+                item_image.loadImg(item.image)
                 setOnClickListener { v -> listener(position) }
             }
         }

@@ -11,7 +11,9 @@ class UiFeedEvent(
         val id: Long,
         val title: String,
         val type: String,
-        val description: String,
+        val place: String,
+        val date: String,
+        val month: String,
         val image: String
 ) : ViewModel
 

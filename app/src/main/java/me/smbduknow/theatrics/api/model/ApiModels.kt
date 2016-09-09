@@ -28,9 +28,12 @@ open class ApiFeedItem(id: Long, type: String) : ApiItem(id, type) {
     var tagline: String = ""
 
     var description: String = ""
-    var images: List<ApiImage> = emptyList()
-
     var address: String = ""
+
+    var images: List<ApiImage> = emptyList()
+    var dates: List<ApiDate> = emptyList()
+
+    var place: ApiFeedItem? = null
 
     fun getTitleImage() = if (!images.isEmpty()) images[0].thumbnails.medium else ""
 }
@@ -38,9 +41,7 @@ open class ApiFeedItem(id: Long, type: String) : ApiItem(id, type) {
 class ApiDetailItem(id: Long, type: String) : ApiFeedItem(id, type) {
 
     var price: ApiPrice? = null
-    var place: ApiFeedItem? = null
 
-    var dates: List<ApiDate> = emptyList()
 }
 
 

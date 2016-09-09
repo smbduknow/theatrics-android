@@ -10,7 +10,7 @@ import rx.Observable
 
 interface TheatricsApi {
 
-    @GET("/api/v1/events/")
+    @GET("/api/v1/events/?expand=place")
     fun getEvents(
             @Query("page_size") limit: Int,
             @Query("page") offset: Int

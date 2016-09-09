@@ -11,10 +11,10 @@
     <dimen name="font_small">12sp</dimen>
     <dimen name="font_normal">14sp</dimen>
     <dimen name="font_large">16sp</dimen>
-    <dimen name="font_title">20sp</dimen>
+    <dimen name="font_title">22sp</dimen>
     <dimen name="font_huge">26sp</dimen>
 
-    <dimen name="image_height_feed">160dp</dimen>
+    <dimen name="image_height_feed">146dp</dimen>
     <dimen name="image_height_detail">240dp</dimen>
 
     <dimen name="icon_size_small">18dp</dimen>
