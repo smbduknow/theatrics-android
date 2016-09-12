@@ -9,12 +9,14 @@ class UiLoader() : ViewModel
 
 class UiFeedEvent(
         val id: Long,
-        val title: String,
         val type: String,
+        val title: String,
+        val lead: String,
         val place: String,
         val date: String,
         val month: String,
-        val image: String
+        val image: String,
+        val isPremiere: Boolean
 ) : ViewModel
 
 

@@ -16,8 +16,9 @@ interface DetailMvpView : MvpView {
     fun setTitle(title: String)
     fun setImage(image: String)
 
-    fun setDetailedInfo(description: String,
-                        tagline: String,
+    fun setDetailedInfo(tagline: String,
+                        leadText: String,
+                        description: String,
                         place: String,
                         address: String,
                         price: String,

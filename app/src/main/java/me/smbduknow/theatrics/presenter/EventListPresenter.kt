@@ -47,12 +47,14 @@ class EventListPresenter : BaseMvpPresenter<ListMvpView>(),ListMvpPresenter {
             val date = sdf.parse(it.dates[0].start)
             UiFeedEvent(
                     it.id,
-                    it.title,
                     it.type,
-                    it.description,
+                    it.getTitleString(),
+                    it.leadText,
+                    it.place?.getTitleString() ?: "TBA",
                     date.format("dd"),
                     date.format("LLLL").substring(0..2),
-                    it.getTitleImage())
+                    it.getTitleImage(),
+                    it.isPremiere)
         })
         view?.showFeed()
         page++

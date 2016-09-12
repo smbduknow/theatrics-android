@@ -26,6 +26,8 @@ open class ApiFeedItem(id: Long, type: String) : ApiItem(id, type) {
     var leadText: String = ""
     @Json(name = "tagline")
     var tagline: String = ""
+    @Json(name = "is_premiere")
+    var isPremiere: Boolean = false
 
     var description: String = ""
     var address: String = ""
@@ -35,6 +37,7 @@ open class ApiFeedItem(id: Long, type: String) : ApiItem(id, type) {
 
     var place: ApiFeedItem? = null
 
+    fun getTitleString() = if(title.isNotEmpty()) title else fullTitle
     fun getTitleImage() = if (!images.isEmpty()) images[0].thumbnails.medium else ""
 }
 
@@ -51,8 +54,8 @@ class ApiDate(
 )
 
 class ApiPrice(
-        val lower: Int,
-        val upper: Int,
+        val lower: Int?,
+        val upper: Int?,
         val text: String
 )
 

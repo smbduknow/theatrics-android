@@ -8,21 +8,20 @@
     android:background="@color/white"
     style="@style/AppTheme.PaddingLayout.WithDivider">
 
-    <TextView
+    <me.smbduknow.theatrics.ui.commons.CompatTextView
         android:id="@+id/detail_title"
+        style="@style/AppTheme.DetailTitle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        style="@style/AppTheme.DetailTitle"
         tools:text="Event title"/>
 
     <TextView
         android:id="@+id/detail_tagline_text"
+        style="@style/AppTheme.DetailTagline"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/space_negative_normal"
-        android:textStyle="italic"
-        android:textSize="@dimen/font_small"
-        tools:text="Lead text"/>
+        tools:text="Tagline text"/>
 
     <include layout="@layout/layout_space_large"/>
 
@@ -83,9 +82,18 @@
     <include layout="@layout/layout_space_large"/>
 
     <TextView
+        android:id="@+id/detail_lead_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/text_primary"
+        android:textSize="@dimen/font_large"
+        tools:text="Lead text"/>
+
+    <TextView
         android:id="@+id/detail_description"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:textColor="@color/text_secondary"
         tools:text="Description"/>
 
 </LinearLayout>

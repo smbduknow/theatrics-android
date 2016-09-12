@@ -44,6 +44,12 @@ public class CompatTextView extends AppCompatTextView {
 			int bottomDrawableRes = a.getResourceId(R.styleable.CompatTextView_compatDrawableBottom, 0);
 			int tintColorRes = a.getResourceId(R.styleable.CompatTextView_compatTintColor, 0);
 
+			String typeface = a.getString(R.styleable.CompatTextView_compatFont);
+
+            if(typeface != null && !typeface.isEmpty()) {
+                setTypeface(FontCache.get(typeface, getContext()));
+            }
+
 			// Load the used drawables, falling back to whatever may be set in an "android:" namespace attribute
 			Drawable[] currentDrawables = getCompoundDrawables();
 			Drawable start = startDrawableRes != 0 ? dm.getDrawable(context, startDrawableRes) : currentDrawables[0];

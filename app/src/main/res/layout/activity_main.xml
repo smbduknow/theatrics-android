@@ -13,7 +13,19 @@
         <android.support.v7.widget.Toolbar
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize" />
+            android:layout_height="?attr/actionBarSize">
+            <me.smbduknow.theatrics.ui.commons.CompatTextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="start|center_vertical"
+                app:compatFont="BebasBold"
+                app:compatDrawableStart="@drawable/ic_masks"
+                app:compatTintColor="@color/text_primary"
+                android:drawablePadding="@dimen/space_large"
+                android:textColor="@color/text_primary"
+                android:textSize="32sp"
+                android:text="@string/app_name"/>
+            </android.support.v7.widget.Toolbar>
 
     </android.support.design.widget.AppBarLayout>
 

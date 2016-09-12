@@ -35,8 +35,9 @@ class EventDetailPresenter : BaseMvpPresenter<DetailMvpView>(), DetailMvpPresent
         view?.setTitle(item.title)
         view?.setImage(item.getTitleImage())
         view?.setDetailedInfo(
-                "<b>%s</b>\n%s".format(item.leadText, item.description),
                 item.tagline,
+                item.leadText,
+                item.description,
                 resolvePlaceName(item.place),
                 resolveAddress(item.place),
                 resolvePrice(item.price),

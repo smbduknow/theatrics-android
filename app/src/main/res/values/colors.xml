@@ -6,7 +6,8 @@
     <color name="white">#ffffff</color>
     <color name="black">#000000</color>
 
-    <color name="white_alpha">#77ffffff</color>
+    <color name="white_alpha">#aaffffff</color>
+    <color name="white_alpha_soft">#44ffffff</color>
     <color name="black_alpha">#88000000</color>
 
     <color name="transparent_white">#00ffffff</color>
@@ -29,5 +30,8 @@
     <color name="text_primary">@color/gray_42</color>
     <color name="text_secondary">@color/gray_77</color>
     <color name="text_light">@color/gray_b7</color>
+
+
+    <color name="red_tag">#cced5e42</color>
 
 </resources>

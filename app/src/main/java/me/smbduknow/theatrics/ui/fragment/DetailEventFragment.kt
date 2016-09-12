@@ -65,8 +65,9 @@ class DetailEventFragment : MvpFragment<DetailMvpPresenter, DetailMvpView>(), De
         (activity as DetailActivity).setCollapsingImage(image)
     }
 
-    override fun setDetailedInfo(description: String,
-                                 tagline: String,
+    override fun setDetailedInfo(tagline: String,
+                                 leadText: String,
+                                 description: String,
                                  place: String,
                                  address: String,
                                  price: String,
@@ -74,6 +75,7 @@ class DetailEventFragment : MvpFragment<DetailMvpPresenter, DetailMvpView>(), De
                                  dateExtra: String,
                                  runningTime: String) {
         detail_description.text = Html.fromHtml(description).trim('\n')
+        setViewText(detail_lead_text, Html.fromHtml(leadText).trim('\n'))
         setViewText(detail_tagline_text, Html.fromHtml(tagline).trim('\n'))
         setViewText(detail_price, price)
         setViewText(detail_running_time, runningTime)
