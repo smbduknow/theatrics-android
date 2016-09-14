@@ -39,16 +39,16 @@ android {
     signingConfigs {
         try {
             config_debug {
-                keyAlias DEBUG_KEY_ALIAS
-                keyPassword DEBUG_KEY_PASSWORD
-                storeFile file(DEBUG_STORE_PATH)
-                storePassword DEBUG_STORE_PASSWORD
+//                keyAlias DEBUG_KEY_ALIAS
+//                keyPassword DEBUG_KEY_PASSWORD
+//                storeFile file(DEBUG_STORE_PATH)
+//                storePassword DEBUG_STORE_PASSWORD
             }
             config_release {
-                keyAlias RELEASE_KEY_ALIAS
-                keyPassword RELEASE_KEY_PASSWORD
-                storeFile file(RELEASE_STORE_PATH)
-                storePassword RELEASE_STORE_PASSWORD
+//                keyAlias RELEASE_KEY_ALIAS
+//                keyPassword RELEASE_KEY_PASSWORD
+//                storeFile file(RELEASE_STORE_PATH)
+//                storePassword RELEASE_STORE_PASSWORD
             }
         } catch (ignored) {
             throw new InvalidUserDataException("Need to define signing configs in app/gradle.properties.")
