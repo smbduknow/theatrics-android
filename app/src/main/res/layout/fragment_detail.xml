@@ -34,7 +34,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             style="@style/AppTheme.DetailMeta"
-            app:compatDrawableStart="@drawable/ic_theater_24dp"
+            app:compatDrawableStart="@drawable/ic_place"
             tools:text="Place Name"/>
         <TextView
             android:id="@+id/detail_place_address"
@@ -76,7 +76,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         style="@style/AppTheme.DetailMeta"
-        app:compatDrawableStart="@drawable/ic_price_24dp"
+        app:compatDrawableStart="@drawable/ic_ticket"
         tools:text="400 - 500"/>
 
     <include layout="@layout/layout_space_large"/>

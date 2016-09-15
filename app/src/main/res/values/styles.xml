@@ -111,8 +111,8 @@
     </style>
 
     <style name="AppTheme.DetailTagline">
+        <item name="android:textColor">@color/text_secondary</item>
         <item name="android:textSize">@dimen/font_small</item>
-        <item name="android:textStyle">italic</item>
     </style>
 
 

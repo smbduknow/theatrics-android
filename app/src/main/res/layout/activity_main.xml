@@ -14,18 +14,34 @@
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize">
-            <me.smbduknow.theatrics.ui.commons.CompatTextView
+            <LinearLayout
+                android:orientation="horizontal"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:gravity="start|center_vertical"
-                app:compatFont="BebasBold"
-                app:compatDrawableStart="@drawable/ic_masks"
-                app:compatTintColor="@color/text_primary"
-                android:drawablePadding="@dimen/space_large"
-                android:textColor="@color/text_primary"
-                android:textSize="32sp"
-                android:text="@string/app_name"/>
-            </android.support.v7.widget.Toolbar>
+                android:layout_height="match_parent">
+                <me.smbduknow.theatrics.ui.commons.CompatTextView
+                    android:layout_weight="1"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:gravity="start|center_vertical"
+                    app:compatFont="BebasBold"
+                    app:compatTintColor="@color/text_primary"
+                    android:drawablePadding="@dimen/space_large"
+                    android:textColor="@color/text_primary"
+                    android:textSize="32sp"
+                    android:text="@string/app_name"/>
+                <ImageButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:background="@color/transparent_white"
+                    android:padding="@dimen/space_large"
+                    android:tint="@color/text_primary"
+                    app:srcCompat="@drawable/ic_search_black_24dp"/>
+            </LinearLayout>
+
+        </android.support.v7.widget.Toolbar>
+
+        <include layout="@layout/layout_appbar_datepicker"/>
 
     </android.support.design.widget.AppBarLayout>
 

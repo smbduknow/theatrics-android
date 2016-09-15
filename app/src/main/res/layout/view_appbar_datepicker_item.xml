@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:padding="@dimen/space_normal"
+    android:gravity="center">
+    <me.smbduknow.theatrics.ui.commons.CompatTextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/font_title"
+        app:compatFont="BebasRegular"
+        android:text="15"/>
+    <me.smbduknow.theatrics.ui.commons.CompatTextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/font_tiny"
+        android:layout_marginTop="@dimen/space_negative_small"
+        app:compatFont="BebasLight"
+        android:text="пт"/>
+</LinearLayout>
