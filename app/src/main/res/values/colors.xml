@@ -8,6 +8,7 @@
 
     <color name="white_alpha">#aaffffff</color>
     <color name="white_alpha_soft">#44ffffff</color>
+    <color name="white_alpha_hard">#eeffffff</color>
     <color name="black_alpha">#88000000</color>
 
     <color name="transparent_white">#00ffffff</color>

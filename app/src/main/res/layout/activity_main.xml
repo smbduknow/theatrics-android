@@ -8,16 +8,28 @@
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:theme="@style/AppTheme.AppBarOverlay">
+        android:theme="@style/AppTheme.AppBarOverlay"
+        app:elevation="0dp">
 
         <android.support.v7.widget.Toolbar
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize">
+            android:layout_height="?attr/actionBarSize"
+            app:contentInsetStart="0dp"
+            app:contentInsetEnd="0dp"
+            app:elevation="0dp">
             <LinearLayout
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
+                <ImageButton
+                    android:id="@+id/menu_btn"
+                    android:layout_width="?actionBarSize"
+                    android:layout_height="?actionBarSize"
+                    android:background="@color/transparent_white"
+                    android:tint="@color/text_primary"
+                    android:scaleType="center"
+                    app:srcCompat="@drawable/ic_menu_black_24dp"/>
                 <me.smbduknow.theatrics.ui.commons.CompatTextView
                     android:layout_weight="1"
                     android:layout_width="0dp"
@@ -30,18 +42,18 @@
                     android:textSize="32sp"
                     android:text="@string/app_name"/>
                 <ImageButton
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
+                    android:id="@+id/search_btn"
+                    android:layout_width="?actionBarSize"
+                    android:layout_height="?actionBarSize"
                     android:background="@color/transparent_white"
-                    android:padding="@dimen/space_large"
                     android:tint="@color/text_primary"
+                    android:scaleType="center"
                     app:srcCompat="@drawable/ic_search_black_24dp"/>
             </LinearLayout>
 
         </android.support.v7.widget.Toolbar>
 
-        <include layout="@layout/layout_appbar_datepicker"/>
+        <!--<include layout="@layout/layout_appbar_datepicker"/>-->
 
     </android.support.design.widget.AppBarLayout>
 
@@ -51,5 +63,12 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
     </FrameLayout>
+
+    <View
+        android:id="@+id/main_menu"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="?actionBarSize"
+        android:background="@color/white_alpha_hard" />
 
 </android.support.design.widget.CoordinatorLayout>
