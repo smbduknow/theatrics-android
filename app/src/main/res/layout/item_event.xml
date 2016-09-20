@@ -25,14 +25,14 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="@drawable/overlay_feed_image"/>
-            <me.smbduknow.theatrics.ui.commons.CompatTextView
+            <me.smbduknow.theatrics.ui.misc.view.CompatTextView
                 android:id="@+id/item_title"
                 style="@style/AppTheme.FeedTitle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="bottom"
                 tools:text="Event title" />
-            <me.smbduknow.theatrics.ui.commons.CompatTextView
+            <me.smbduknow.theatrics.ui.misc.view.CompatTextView
                 android:id="@+id/item_premiere_tag"
                 style="@style/AppTheme.FeedTag"
                 android:layout_width="wrap_content"
@@ -54,13 +54,13 @@
                 android:layout_width="54dp"
                 android:layout_height="match_parent"
                 android:gravity="center">
-                <me.smbduknow.theatrics.ui.commons.CompatTextView
+                <me.smbduknow.theatrics.ui.misc.view.CompatTextView
                     android:id="@+id/item_date"
                     style="@style/AppTheme.FeedDate"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     tools:text="22"/>
-                <me.smbduknow.theatrics.ui.commons.CompatTextView
+                <me.smbduknow.theatrics.ui.misc.view.CompatTextView
                     android:id="@+id/item_month"
                     style="@style/AppTheme.FeedMonth"
                     android:layout_width="wrap_content"

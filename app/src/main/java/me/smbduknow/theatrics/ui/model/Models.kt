@@ -1,6 +1,6 @@
 package me.smbduknow.theatrics.ui.model
 
-import me.smbduknow.theatrics.ui.commons.adapter.ViewModel
+import me.smbduknow.theatrics.ui.misc.adapter.ViewModel
 import java.util.*
 
 
@@ -29,7 +29,7 @@ object ViewState {
 class UiFeedView (
         var state: Int,
         var listPage: Int,
-        var listItems: ArrayList<UiFeedEvent> = ArrayList()
+        var listItems: ArrayList<ViewModel> = ArrayList()
 ) : ViewModel
 
 

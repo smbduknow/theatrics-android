@@ -6,13 +6,13 @@
     android:layout_height="wrap_content"
     android:padding="@dimen/space_normal"
     android:gravity="center">
-    <me.smbduknow.theatrics.ui.commons.CompatTextView
+    <me.smbduknow.theatrics.ui.misc.view.CompatTextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="@dimen/font_title"
         app:compatFont="BebasRegular"
         android:text="15"/>
-    <me.smbduknow.theatrics.ui.commons.CompatTextView
+    <me.smbduknow.theatrics.ui.misc.view.CompatTextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="@dimen/font_tiny"

@@ -1,14 +1,10 @@
 package me.smbduknow.theatrics.api
 
-import me.smbduknow.theatrics.api.model.ApiFeedItem
-import me.smbduknow.theatrics.api.model.ApiListResponse
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory
 import retrofit2.converter.moshi.MoshiConverterFactory
-import rx.Observable
-import java.util.*
 
 object ApiFactory {
 

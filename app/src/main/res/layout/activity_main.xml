@@ -30,7 +30,7 @@
                     android:tint="@color/text_primary"
                     android:scaleType="center"
                     app:srcCompat="@drawable/ic_menu_black_24dp"/>
-                <me.smbduknow.theatrics.ui.commons.CompatTextView
+                <me.smbduknow.theatrics.ui.misc.view.CompatTextView
                     android:layout_weight="1"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"

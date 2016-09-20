@@ -1,7 +1,6 @@
 package me.smbduknow.theatrics.api.model
 
 import com.squareup.moshi.Json
-import java.util.*
 
 class ApiListResponse<T> (
         val previous : String,
