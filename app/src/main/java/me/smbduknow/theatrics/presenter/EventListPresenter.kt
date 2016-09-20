@@ -4,9 +4,7 @@ import me.smbduknow.theatrics.BuildConfig
 import me.smbduknow.theatrics.api.ApiFactory
 import me.smbduknow.theatrics.api.model.ApiFeedItem
 import me.smbduknow.theatrics.api.model.ApiListResponse
-import me.smbduknow.theatrics.mvp.BaseMvpPresenter
-import me.smbduknow.theatrics.mvp.ListMvpPresenter
-import me.smbduknow.theatrics.mvp.ListMvpView
+import me.smbduknow.theatrics.mvp.*
 import me.smbduknow.theatrics.ui.commons.format
 import me.smbduknow.theatrics.ui.model.UiFeedEvent
 import rx.android.schedulers.AndroidSchedulers
@@ -15,13 +13,21 @@ import java.text.SimpleDateFormat
 import java.util.*
 import java.util.concurrent.TimeUnit
 
-class EventListPresenter : BaseMvpPresenter<ListMvpView>(),ListMvpPresenter {
+class EventListPresenter : BaseMvpPresenter<EventListMvpView>(), EventListMvpPresenter {
 
     private val sdf = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss", Locale.getDefault())
 
     private var isLoading = false
 
     private var page = 1
+
+    private var pLocation = "spb"
+    private var pDate: String? = null
+
+    override fun setParameters(location: String, date: String?) {
+        pLocation = location
+        pDate = date
+    }
 
     override fun requestNext(refresh: Boolean) {
         if(isLoading) return
@@ -31,8 +37,7 @@ class EventListPresenter : BaseMvpPresenter<ListMvpView>(),ListMvpPresenter {
             view?.clearItems()
             page = 1
         }
-        subscription = ApiFactory.getApi().getEvents(10, page)
-                .delay(2, TimeUnit.SECONDS)
+        subscription = ApiFactory.getApi().getEvents(pLocation, pDate, 10, page)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(

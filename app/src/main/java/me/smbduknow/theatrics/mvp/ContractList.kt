@@ -2,7 +2,7 @@ package me.smbduknow.theatrics.mvp
 
 import me.smbduknow.theatrics.ui.model.UiFeedEvent
 
-interface ListMvpPresenter : MvpPresenter<ListMvpView> {
+interface ListMvpPresenter<in V : ListMvpView> : MvpPresenter<V> {
 
     fun requestNext(refresh: Boolean = false)
 }

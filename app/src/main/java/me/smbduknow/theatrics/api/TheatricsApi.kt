@@ -12,8 +12,10 @@ interface TheatricsApi {
 
     @GET("/api/v1/events/?expand=place")
     fun getEvents(
-            @Query("page_size") limit: Int,
-            @Query("page") offset: Int
+            @Query("location")  location:   String,
+            @Query("date")      date:       String? = null,
+            @Query("page_size") limit:      Int = 20,
+            @Query("page")      offset:     Int = 1
     ) : Observable<ApiListResponse<ApiFeedItem>>
 
     @GET("/api/v1/events/{id}/?expand=place")

@@ -8,9 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import kotlinx.android.synthetic.main.fragment_feed.*
 import me.smbduknow.theatrics.R
-import me.smbduknow.theatrics.mvp.ListMvpPresenter
-import me.smbduknow.theatrics.mvp.ListMvpView
-import me.smbduknow.theatrics.mvp.MvpFragment
+import me.smbduknow.theatrics.mvp.*
 import me.smbduknow.theatrics.presenter.EventListPresenter
 import me.smbduknow.theatrics.ui.activity.DetailActivity
 import me.smbduknow.theatrics.ui.adapter.EventsAdapter
@@ -21,18 +19,18 @@ import me.smbduknow.theatrics.ui.model.UiFeedEvent
 import me.smbduknow.theatrics.ui.model.UiFeedView
 import me.smbduknow.theatrics.ui.model.ViewState
 
-class ListEventFragment : MvpFragment<ListMvpPresenter, ListMvpView>(), ListMvpView {
+class ListEventFragment : MvpFragment<EventListMvpPresenter, EventListMvpView>(), EventListMvpView {
 
-    private val feedLoader by lazy { feed_loader }
-    private val feedSwipeRefresh by lazy { feed_swipe_refresh }
-    private val feedList by lazy { feed_list }
-    private val feedEmpty by lazy { feed_empty }
+    private val feedLoader          by lazy { feed_loader }
+    private val feedSwipeRefresh    by lazy { feed_swipe_refresh }
+    private val feedList            by lazy { feed_list }
+    private val feedEmpty           by lazy { feed_empty }
 
     private var feedAdapter: EventsAdapter? = null
 
     private var state = UiFeedView(ViewState.STATE_LOADING, 0)
 
-    override fun onCreatePresenter(): ListMvpPresenter = EventListPresenter()
+    override fun onCreatePresenter(): EventListMvpPresenter = EventListPresenter()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return container?.inflate(R.layout.fragment_feed)
