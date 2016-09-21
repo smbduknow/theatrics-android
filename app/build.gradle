@@ -69,6 +69,12 @@ android {
     }
 }
 
+repositories {
+    maven {
+        url "https://jitpack.io"
+    }
+}
+
 dependencies {
 
     final supportLibraryVersion = '23.2.1'
@@ -92,17 +98,21 @@ dependencies {
     compile "com.android.support:cardview-v7:$supportLibraryVersion"
     compile "com.android.support:design:$supportLibraryVersion"
 
-    //io (squareup)
+    //okhttp
     compile "com.squareup.okhttp3:okhttp:$ioOkhttpVersion"
     compile "com.squareup.okhttp3:logging-interceptor:$ioOkhttpVersion"
 
+    //retrofit
     compile ("com.squareup.retrofit2:retrofit:$ioRetrofitVersion") { exclude module: 'okhttp' }
     compile "com.squareup.retrofit2:converter-moshi:$ioRetrofitVersion"
     compile "com.squareup.retrofit2:adapter-rxjava:$ioRetrofitVersion"
 
+    //picasso
     compile "com.squareup.picasso:picasso:$ioPicassoVersion"
 
     //rx
     compile "io.reactivex:rxjava:$rxJavaVersion"
     compile "io.reactivex:rxandroid:$rxAndroidVersion"
+
+    compile ('com.github.ozodrukh:CircularReveal:2.0.1@aar') { transitive = true; }
 }

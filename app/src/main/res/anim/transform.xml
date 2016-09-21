@@ -5,5 +5,5 @@
         android:propertyName="pathData"
         android:valueFrom="M20 30,L80 30,M20 50,L80 50,M20 70,L80 70"
         android:valueTo=  "M50 25,L80 50,M20 50,L80 50,M50 75,L80 50"
-        android:valueType="pathType"/>
+        android:valueType="pathType" />
 </set>

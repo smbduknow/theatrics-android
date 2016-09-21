@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical"
+    xmlns:tools="http://schemas.android.com/tools"
+    style="@style/AppTheme.PaddingLayout.WithDivider"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
-    style="@style/AppTheme.PaddingLayout.WithDivider">
+    android:orientation="vertical">
 
     <me.smbduknow.theatrics.ui.misc.view.CompatTextView
         android:id="@+id/detail_title"
         style="@style/AppTheme.DetailTitle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        tools:text="Event title"/>
+        tools:text="Event title" />
 
     <TextView
         android:id="@+id/detail_tagline_text"
@@ -21,65 +21,69 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/space_negative_normal"
-        tools:text="Tagline text"/>
+        tools:text="Tagline text" />
 
-    <include layout="@layout/layout_space_large"/>
+    <include layout="@layout/layout_space_large" />
 
     <LinearLayout
-        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
         <me.smbduknow.theatrics.ui.misc.view.CompatTextView
             android:id="@+id/detail_place"
+            style="@style/AppTheme.DetailMeta"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            style="@style/AppTheme.DetailMeta"
             app:compatDrawableStart="@drawable/ic_place"
-            tools:text="Place Name"/>
+            tools:text="Place Name" />
+
         <TextView
             android:id="@+id/detail_place_address"
+            style="@style/AppTheme.DetailMeta.Extra"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            style="@style/AppTheme.DetailMeta.Extra"
-            tools:text="Address"/>
+            tools:text="Address" />
     </LinearLayout>
 
     <LinearLayout
-        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
         <me.smbduknow.theatrics.ui.misc.view.CompatTextView
             android:id="@+id/detail_date"
+            style="@style/AppTheme.DetailMeta"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            style="@style/AppTheme.DetailMeta"
             app:compatDrawableStart="@drawable/ic_event_24dp"
-            tools:text="September 3"/>
+            tools:text="September 3" />
+
         <TextView
             android:id="@+id/detail_date_time"
+            style="@style/AppTheme.DetailMeta.Extra"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            style="@style/AppTheme.DetailMeta.Extra"
-            tools:text="Monday, 19:00 - 21:25"/>
+            tools:text="Monday, 19:00 - 21:25" />
     </LinearLayout>
 
     <me.smbduknow.theatrics.ui.misc.view.CompatTextView
         android:id="@+id/detail_running_time"
+        style="@style/AppTheme.DetailMeta"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        style="@style/AppTheme.DetailMeta"
         app:compatDrawableStart="@drawable/ic_time_24dp"
-        tools:text="2 hr 3 min"/>
+        tools:text="2 hr 3 min" />
 
     <me.smbduknow.theatrics.ui.misc.view.CompatTextView
         android:id="@+id/detail_price"
+        style="@style/AppTheme.DetailMeta"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        style="@style/AppTheme.DetailMeta"
         app:compatDrawableStart="@drawable/ic_ticket"
-        tools:text="400 - 500"/>
+        tools:text="400 - 500" />
 
-    <include layout="@layout/layout_space_large"/>
+    <include layout="@layout/layout_space_large" />
 
     <TextView
         android:id="@+id/detail_lead_text"
@@ -87,13 +91,13 @@
         android:layout_height="wrap_content"
         android:textColor="@color/text_primary"
         android:textSize="@dimen/font_large"
-        tools:text="Lead text"/>
+        tools:text="Lead text" />
 
     <TextView
         android:id="@+id/detail_description"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textColor="@color/text_secondary"
-        tools:text="Description"/>
+        tools:text="Description" />
 
 </LinearLayout>

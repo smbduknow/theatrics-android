@@ -8,11 +8,12 @@
         android:id="@+id/feed_swipe_refresh"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+
         <android.support.v7.widget.RecyclerView
             android:id="@+id/feed_list"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:clipToPadding="false"/>
+            android:clipToPadding="false" />
     </android.support.v4.widget.SwipeRefreshLayout>
 
     <TextView
@@ -21,7 +22,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:gravity="center"
-        android:text="Nothing was found!"/>
+        android:text="Nothing was found!" />
 
     <ProgressBar
         android:id="@+id/feed_loader"
@@ -29,6 +30,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:indeterminate="true"/>
+        android:indeterminate="true" />
 
 </FrameLayout>

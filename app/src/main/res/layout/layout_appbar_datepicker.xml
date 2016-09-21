@@ -1,46 +1,53 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="horizontal"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:orientation="horizontal">
 
     <FrameLayout
-        android:layout_weight="1"
         android:layout_width="0dp"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:layout_weight="1">
+
         <me.smbduknow.theatrics.ui.misc.view.CompatTextView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:gravity="center"
+            android:text="Самое"
             android:textSize="@dimen/font_large"
-            app:compatFont="BebasRegular"
-            android:text="Самое"/>
+            app:compatFont="BebasRegular" />
+
         <View
             android:layout_width="match_parent"
             android:layout_height="3dp"
             android:layout_gravity="bottom"
-            android:background="@color/text_secondary"/>
+            android:background="@color/text_secondary" />
     </FrameLayout>
 
 
-    <include layout="@layout/view_appbar_datepicker_item"/>
-    <include layout="@layout/view_appbar_datepicker_item"/>
-    <include layout="@layout/view_appbar_datepicker_item"/>
-    <include layout="@layout/view_appbar_datepicker_item"/>
-    <include layout="@layout/view_appbar_datepicker_item"/>
-    <include layout="@layout/view_appbar_datepicker_item"/>
+    <include layout="@layout/view_appbar_datepicker_item" />
+
+    <include layout="@layout/view_appbar_datepicker_item" />
+
+    <include layout="@layout/view_appbar_datepicker_item" />
+
+    <include layout="@layout/view_appbar_datepicker_item" />
+
+    <include layout="@layout/view_appbar_datepicker_item" />
+
+    <include layout="@layout/view_appbar_datepicker_item" />
 
 
     <ImageButton
-        android:layout_weight="1"
         android:layout_width="0dp"
         android:layout_height="match_parent"
-        android:gravity="center"
+        android:layout_weight="1"
         android:background="@color/transparent_white"
-
+        android:gravity="center"
         android:padding="@dimen/space_normal"
+
         android:tint="@color/text_secondary"
-        app:srcCompat="@drawable/ic_more_vert_black_24dp"/>
+        app:srcCompat="@drawable/ic_more_vert_black_24dp" />
 
 </LinearLayout>

@@ -24,7 +24,7 @@
 
     <!-- LAYOUT -->
 
-    <style name="AppTheme.Layout"/>
+    <style name="AppTheme.Layout" />
 
     <style name="AppTheme.Layout.WithDivider">
         <item name="android:divider">@drawable/space_normal</item>
@@ -104,7 +104,6 @@
     </style>
 
 
-
     <style name="AppTheme.DetailTitle">
         <item name="compatFont">BebasRegular</item>
         <item name="android:textSize">@dimen/font_bebas_huge</item>
@@ -131,6 +130,8 @@
         <item name="android:layout_marginLeft">@dimen/icon_size_normal</item>
         <item name="android:paddingLeft">@dimen/space_large</item>
     </style>
+
+    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
 
 </resources>

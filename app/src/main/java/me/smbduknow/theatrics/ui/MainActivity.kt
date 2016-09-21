@@ -1,11 +1,12 @@
 package me.smbduknow.theatrics.ui
 
-import android.graphics.drawable.AnimatedVectorDrawable
-import android.os.Build
+import android.animation.Animator
+import android.animation.AnimatorListenerAdapter
 import android.os.Bundle
+import android.support.v7.graphics.drawable.DrawerArrowDrawable
 import android.support.v7.widget.Toolbar
 import android.view.View
-import android.view.ViewAnimationUtils
+import io.codetail.animation.ViewAnimationUtils
 import kotlinx.android.synthetic.main.activity_main.*
 import me.smbduknow.theatrics.R
 import me.smbduknow.theatrics.ui.base.BaseActivity
@@ -16,6 +17,8 @@ class MainActivity : BaseActivity() {
     private val menuView by lazy { main_menu }
     private val menuButton by lazy { menu_btn }
     private val searchButton by lazy { search_btn }
+
+    private var arrowDrawable: DrawerArrowDrawable? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,26 +34,62 @@ class MainActivity : BaseActivity() {
 
         menuView.visibility = View.GONE
 
+
+        arrowDrawable = DrawerArrowDrawable(this)
+        menuButton.setImageDrawable(arrowDrawable)
+
         menuButton.setOnClickListener { v ->
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-
-                val drawable = resources.getDrawable(R.drawable.animated_drawable, null) as AnimatedVectorDrawable
-                menuButton.setImageDrawable(drawable)
-
-                val finalRadius = Math.max(menuView.width, menuView.height).toFloat()
-
-                if(menuView.visibility == View.VISIBLE) {
-                    menuView.visibility = View.GONE
-                    menuView.animate().alpha(0f).withEndAction { menuView.visibility = View.VISIBLE  }
-                    searchButton.animate().alpha(0f).withEndAction { searchButton.visibility = View.VISIBLE  }
-                } else {
-                    drawable.start()
-                    menuView.visibility = View.VISIBLE
-                    ViewAnimationUtils.createCircularReveal(menuView, 0, 0, 0f, finalRadius).start()
-                    searchButton.animate().alpha(0f).withEndAction { searchButton.visibility = View.GONE  }
-                }
+            if(menuView.visibility == View.GONE) {
+                showMenuView()
+                showSearchIcon(false)
+            }
+            else {
+                showMenuView(false)
+                showSearchIcon()
             }
         }
+    }
+
+    override fun onBackPressed() {
+        if(menuView.visibility == View.VISIBLE) {
+            showMenuView(false)
+            showSearchIcon()
+        } else {
+            super.onBackPressed()
+        }
+    }
+
+    private fun showMenuView(visible: Boolean = true) {
+        val parent = menuView.parent as View
+        menuView.measure(
+                View.MeasureSpec.makeMeasureSpec(parent.width, View.MeasureSpec.AT_MOST),
+                View.MeasureSpec.makeMeasureSpec(parent.height, View.MeasureSpec.AT_MOST))
+        val revealRadius = Math.hypot(
+                menuView.measuredWidth.toDouble(),
+                menuView.measuredHeight.toDouble()).toFloat()
+
+        val animator: Animator
+
+        if(visible) {
+            menuView.visibility = View.VISIBLE
+            animator = ViewAnimationUtils.createCircularReveal(menuView, 0, 0, 0f, revealRadius)
+            arrowDrawable?.progress = 1f
+        } else {
+            animator = ViewAnimationUtils.createCircularReveal(menuView, 0, 0, revealRadius, 0f)
+            animator.addListener(object : AnimatorListenerAdapter() {
+                override fun onAnimationEnd(animation: Animator?) {
+                    menuView.visibility = View.GONE
+                }
+            })
+            arrowDrawable?.progress = 0f
+        }
+
+        animator.start()
+    }
+
+
+    protected fun showSearchIcon(visible: Boolean = true) {
+        searchButton.animate().alpha(if (visible) 1f else 0f).start()
     }
 
 }
