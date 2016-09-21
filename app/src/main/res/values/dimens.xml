@@ -2,6 +2,7 @@
 
     <dimen name="space_small">4dp</dimen>
     <dimen name="space_normal">8dp</dimen>
+    <dimen name="space_medium">12dp</dimen>
     <dimen name="space_large">16dp</dimen>
 
     <dimen name="space_negative_small">-4dp</dimen>

@@ -73,11 +73,13 @@
         android:layout_marginTop="?actionBarSize">
 
         <!-- Put more views here if you want, it's stock frame layout  -->
-        <View
+        <FrameLayout
             android:id="@+id/main_menu"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@color/white_alpha_hard" />
+            android:layout_height="match_parent">
+            <include layout="@layout/layout_menu" />
+        </FrameLayout>
+
 
     </io.codetail.widget.RevealFrameLayout>
 
