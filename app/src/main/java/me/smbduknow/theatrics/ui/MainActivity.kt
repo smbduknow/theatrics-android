@@ -6,15 +6,20 @@ import android.os.Bundle
 import android.support.v7.graphics.drawable.DrawerArrowDrawable
 import android.support.v7.widget.Toolbar
 import android.view.View
-import android.widget.ArrayAdapter
+import android.widget.AdapterView
 import io.codetail.animation.ViewAnimationUtils
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.layout_menu.*
 import me.smbduknow.theatrics.R
+import me.smbduknow.theatrics.preference.PreferenceHelper
 import me.smbduknow.theatrics.ui.base.BaseActivity
 import me.smbduknow.theatrics.ui.feed.FeedEventFragment
+import me.smbduknow.theatrics.ui.feed.adapter.CityArrayAdapter
+import me.smbduknow.theatrics.ui.model.UiCity
 
 class MainActivity : BaseActivity() {
+
+    private val LAYOUT_RES = R.layout.activity_main
 
     private val menuView by lazy { main_menu }
     private val menuButton by lazy { menu_btn }
@@ -24,9 +29,11 @@ class MainActivity : BaseActivity() {
 
     private var arrowDrawable: DrawerArrowDrawable? = null
 
+    private var isCityChanged = false
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        setContentView(LAYOUT_RES)
         val toolbar = findViewById(R.id.toolbar) as Toolbar?
         setSupportActionBar(toolbar)
 
@@ -37,7 +44,6 @@ class MainActivity : BaseActivity() {
         }
 
         menuView.visibility = View.GONE
-
 
         arrowDrawable = DrawerArrowDrawable(this)
         menuButton.setImageDrawable(arrowDrawable)
@@ -53,12 +59,27 @@ class MainActivity : BaseActivity() {
             }
         }
 
-
-
-        val adapter = ArrayAdapter(this, android.R.layout.simple_spinner_item,
-                listOf("Санкт-Петербург", "Москва"))
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        // TODO request from API
+        val adapter = CityArrayAdapter(this, android.R.layout.simple_spinner_item, listOf(
+                UiCity("msk",           "Москва"),
+                UiCity("spb",           "Санкт-Петербург"),
+                UiCity("ekb",           "Екатеринбург"),
+                UiCity("kev",           "Киев"),
+                UiCity("krasnoyarsk",   "Красноярск"),
+                UiCity("kzn",           "Казань"),
+                UiCity("nnv",           "Нижний Новгород"),
+                UiCity("nsk",           "Новосибирск"),
+                UiCity("sochi",         "Сочи")
+        ))
         citySpinner.adapter = adapter
+        citySpinner.setSelection(adapter.findPositionBySlug(PreferenceHelper.getUserCity()))
+        citySpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onNothingSelected(parent: AdapterView<*>?) { }
+            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+                PreferenceHelper.setUserCity(adapter.objects[position].slug)
+                isCityChanged = true
+            }
+        }
 
     }
 
@@ -94,14 +115,22 @@ class MainActivity : BaseActivity() {
                 }
             })
             arrowDrawable?.progress = 0f
+            onMenuClosed()
         }
 
         animator.start()
     }
 
-
     protected fun showSearchIcon(visible: Boolean = true) {
         searchButton.animate().alpha(if (visible) 1f else 0f).start()
+    }
+
+    protected fun onMenuClosed() {
+        if(isCityChanged) {
+            isCityChanged = false
+            val feedFragment = supportFragmentManager.findFragmentById(R.id.content_main) as FeedEventFragment
+            feedFragment.refreshFeed()
+        }
     }
 
 }

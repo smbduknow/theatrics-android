@@ -9,6 +9,8 @@ import me.smbduknow.theatrics.ui.misc.loadImg
 
 class DetailActivity : BaseActivity() {
 
+    private val LAYOUT_RES = R.layout.activity_detail
+
     private val mToolbar by lazy { detail_toolbar }
     private val mCollapsingToolbar by lazy { detail_collapsing_toolbar }
 
@@ -16,7 +18,7 @@ class DetailActivity : BaseActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_detail)
+        setContentView(LAYOUT_RES)
 
         setSupportActionBar(mToolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)

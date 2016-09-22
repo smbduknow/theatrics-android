@@ -7,6 +7,7 @@ import me.smbduknow.theatrics.api.model.ApiListResponse
 import me.smbduknow.theatrics.ui.base.BasePresenter
 import me.smbduknow.theatrics.ui.misc.format
 import me.smbduknow.theatrics.ui.model.UiFeedEvent
+import me.smbduknow.theatrics.ui.model.UiLoader
 import rx.android.schedulers.AndroidSchedulers
 import rx.schedulers.Schedulers
 import java.text.SimpleDateFormat
@@ -60,6 +61,7 @@ class FeedEventPresenter : BasePresenter<IFeedView>(), IFeedPresenter {
                     it.getTitleImage(),
                     it.isPremiere)
         })
+        if(response.next.isNotEmpty()) view?.addItems(listOf(UiLoader()))
         view?.showFeed()
         page++
 

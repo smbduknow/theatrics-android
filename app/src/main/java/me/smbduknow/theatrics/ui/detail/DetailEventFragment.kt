@@ -17,6 +17,8 @@ import me.smbduknow.theatrics.ui.model.ViewState
 
 class DetailEventFragment : BasePresenterFragment<IDetailPresenter, IDetailView>(), IDetailView {
 
+    private val LAYOUT_RES = R.layout.fragment_detail
+
     private var state = UiDetailView(ViewState.STATE_LOADING)
 
     companion object {
@@ -32,7 +34,7 @@ class DetailEventFragment : BasePresenterFragment<IDetailPresenter, IDetailView>
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        return container?.inflate(R.layout.fragment_detail)
+        return container?.inflate(inflater, LAYOUT_RES)
     }
 
     override fun onResume() {

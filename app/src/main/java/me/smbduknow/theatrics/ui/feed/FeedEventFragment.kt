@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import kotlinx.android.synthetic.main.fragment_feed.*
 import me.smbduknow.theatrics.R
+import me.smbduknow.theatrics.preference.PreferenceHelper
 import me.smbduknow.theatrics.ui.base.BasePresenterFragment
 import me.smbduknow.theatrics.ui.base.PresenterFactory
 import me.smbduknow.theatrics.ui.detail.DetailActivity
@@ -17,9 +18,12 @@ import me.smbduknow.theatrics.ui.misc.SpaceItemDecorator
 import me.smbduknow.theatrics.ui.misc.adapter.ViewModel
 import me.smbduknow.theatrics.ui.misc.inflate
 import me.smbduknow.theatrics.ui.model.UiFeedView
+import me.smbduknow.theatrics.ui.model.UiLoader
 import me.smbduknow.theatrics.ui.model.ViewState
 
 class FeedEventFragment : BasePresenterFragment<IFeedPresenter, IFeedView>(), IFeedView {
+
+    private val LAYOUT_RES = R.layout.fragment_feed
 
     private val feedLoader          by lazy { feed_loader }
     private val feedSwipeRefresh    by lazy { feed_swipe_refresh }
@@ -35,13 +39,13 @@ class FeedEventFragment : BasePresenterFragment<IFeedPresenter, IFeedView>(), IF
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        return container?.inflate(R.layout.fragment_feed)
+        return container?.inflate(inflater, LAYOUT_RES)
     }
 
     override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        feedSwipeRefresh.setOnRefreshListener { presenter?.requestNext(true) }
+        feedSwipeRefresh.setOnRefreshListener { refreshFeed() }
 
         val linearLayout = LinearLayoutManager(context)
         feedAdapter = EventsAdapter()
@@ -51,7 +55,7 @@ class FeedEventFragment : BasePresenterFragment<IFeedPresenter, IFeedView>(), IF
             layoutManager = linearLayout
             addItemDecoration(SpaceItemDecorator(SpaceItemDecorator.Companion.VERTICAL))
             clearOnScrollListeners()
-            addOnScrollListener(InfiniteScrollListener(linearLayout, { presenter?.requestNext() } ))
+            addOnScrollListener(InfiniteScrollListener(linearLayout, { loadNextPage() } ))
             adapter = feedAdapter
         }
     }
@@ -78,7 +82,7 @@ class FeedEventFragment : BasePresenterFragment<IFeedPresenter, IFeedView>(), IF
     override fun onResume() {
         super.onResume()
         if(state.state == ViewState.STATE_LOADING) {
-            presenter?.requestNext(true)
+            refreshFeed()
             state.state = ViewState.STATE_CONTENT
         }
     }
@@ -111,6 +115,10 @@ class FeedEventFragment : BasePresenterFragment<IFeedPresenter, IFeedView>(), IF
     }
 
     override fun addItems(items: List<ViewModel>) {
+        if(feedAdapter?.getItems()?.isNotEmpty() ?: false ) {
+            val loader = feedAdapter?.getItems()?.last() ?: null
+            if(loader != null && loader is UiLoader) feedAdapter?.remove(feedAdapter!!.itemCount - 1)
+        }
         feedAdapter?.addAll(items)
         feedAdapter?.notifyDataSetChanged()
     }
@@ -120,10 +128,18 @@ class FeedEventFragment : BasePresenterFragment<IFeedPresenter, IFeedView>(), IF
         feedAdapter?.notifyDataSetChanged()
     }
 
+    fun refreshFeed() {
+        val slug = PreferenceHelper.getUserCity()
+        presenter?.setParameters(if (slug.isNotEmpty()) slug else "msk" )
+        presenter?.requestNext(true)
+    }
+    fun loadNextPage() = presenter?.requestNext()
+
     fun startDetailActivity(position: Int) {
         val intent = Intent(context, DetailActivity::class.java)
         intent.putExtra("event", feedAdapter?.getItem(position))
         startActivity(intent)
     }
-
 }
+
+

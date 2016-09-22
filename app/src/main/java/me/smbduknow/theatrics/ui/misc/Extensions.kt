@@ -16,6 +16,11 @@ fun ViewGroup.inflate(layoutId: Int, attachToRoot: Boolean = false): View {
     return LayoutInflater.from(context).inflate(layoutId, this, attachToRoot)
 }
 
+fun ViewGroup.inflate(inflater: LayoutInflater, layoutId: Int, attachToRoot: Boolean = false): View {
+    return inflater.inflate(layoutId, this, attachToRoot)
+}
+
+
 fun ImageView.loadImg(imageUrl: String) {
     if (TextUtils.isEmpty(imageUrl)) {
         Picasso.with(context).load(R.drawable.pic_placeholder).into(this)

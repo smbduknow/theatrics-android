@@ -37,3 +37,8 @@ class UiDetailView(
         var state: Int,
         var detailItem: UiFeedEvent? = null
 ) : ViewModel
+
+class UiCity(
+        var slug: String,
+        var title: String
+) : ViewModel
