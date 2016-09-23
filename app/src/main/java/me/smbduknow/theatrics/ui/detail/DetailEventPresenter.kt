@@ -11,12 +11,8 @@ import me.smbduknow.theatrics.ui.misc.format
 import me.smbduknow.theatrics.ui.model.UiFeedEvent
 import rx.android.schedulers.AndroidSchedulers
 import rx.schedulers.Schedulers
-import java.text.SimpleDateFormat
-import java.util.*
 
 class DetailEventPresenter : BasePresenter<IDetailView>(), IDetailPresenter {
-
-    private val sdf = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss", Locale.getDefault())
 
     override fun requestDetail(event: UiFeedEvent) {
         view?.showLoader()
@@ -72,21 +68,20 @@ class DetailEventPresenter : BasePresenter<IDetailView>(), IDetailPresenter {
     // TODO common date parser
     private fun resolveDeteString(dates: List<ApiDate>): String {
         if(dates.isEmpty()) return ""
-        val date = sdf.parse(dates[0].start)
-        return date.format("d MMMM")
+        return dates[0].start.format("d MMMM")
     }
 
     private fun resolveDeteSubstring(dates: List<ApiDate>): String {
         if(dates.isEmpty()) return ""
-        val start = sdf.parse(dates[0].start)
-        val end = sdf.parse(dates[0].end)
+        val start = dates[0].start
+        val end = dates[0].end
         return "%s - %s".format(start.format("EEEE, H:mm"), end.format("H:mm"))
     }
 
     private fun resolveRunningTime(dates: List<ApiDate>): String {
         if(dates.isEmpty()) return ""
-        val start = sdf.parse(dates[0].start)
-        val end = sdf.parse(dates[0].end)
+        val start = dates[0].start
+        val end = dates[0].end
         val minutes = (end.time - start.time) / (60 * 1000)
         return "%d:%02d".format(minutes / 60, minutes % 60)
     }

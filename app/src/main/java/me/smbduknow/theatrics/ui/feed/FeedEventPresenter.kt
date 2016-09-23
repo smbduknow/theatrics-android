@@ -10,12 +10,8 @@ import me.smbduknow.theatrics.ui.model.UiFeedEvent
 import me.smbduknow.theatrics.ui.model.UiLoader
 import rx.android.schedulers.AndroidSchedulers
 import rx.schedulers.Schedulers
-import java.text.SimpleDateFormat
-import java.util.*
 
 class FeedEventPresenter : BasePresenter<IFeedView>(), IFeedPresenter {
-
-    private val sdf = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss", Locale.getDefault())
 
     private var isLoading = false
 
@@ -49,15 +45,14 @@ class FeedEventPresenter : BasePresenter<IFeedView>(), IFeedPresenter {
 
     private fun handleResponse(response: ApiListResponse<ApiFeedItem>) {
         view?.addItems(response.items.map {
-            val date = sdf.parse(it.dates[0].start)
             UiFeedEvent(
                     it.id,
                     it.type,
                     it.getTitleString(),
                     it.leadText,
                     it.place?.getTitleString() ?: "TBA",
-                    date.format("dd"),
-                    date.format("LLLL").substring(0..2),
+                    it.dates[0].start.format("dd"),
+                    it.dates[0].start.format("LLLL").substring(0..2),
                     it.getTitleImage(),
                     it.isPremiere)
         })

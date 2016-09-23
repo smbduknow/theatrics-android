@@ -10,4 +10,9 @@
         <attr name="compatFont" format="string"/>
     </declare-styleable>
 
+    <declare-styleable name="CalendarDateView">
+        <attr name="textDate" format="string"/>
+        <attr name="textDay" format="string"/>
+    </declare-styleable>
+
 </resources>

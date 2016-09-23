@@ -5,48 +5,58 @@
     android:layout_height="wrap_content"
     android:orientation="horizontal">
 
-    <FrameLayout
-        android:layout_width="0dp"
-        android:layout_height="match_parent"
-        android:layout_weight="1">
 
-        <me.smbduknow.theatrics.ui.misc.view.CompatTextView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center"
-            android:text="Самое"
-            android:textSize="@dimen/font_large"
-            app:compatFont="BebasRegular" />
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="3dp"
-            android:layout_gravity="bottom"
-            android:background="@color/text_secondary" />
-    </FrameLayout>
-
-
-    <include layout="@layout/view_appbar_datepicker_item" />
-
-    <include layout="@layout/view_appbar_datepicker_item" />
-
-    <include layout="@layout/view_appbar_datepicker_item" />
-
-    <include layout="@layout/view_appbar_datepicker_item" />
-
-    <include layout="@layout/view_appbar_datepicker_item" />
-
-    <include layout="@layout/view_appbar_datepicker_item" />
-
-
-    <ImageButton
+    <me.smbduknow.theatrics.ui.misc.view.CompatTextView
+        android:id="@+id/filter_best"
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_weight="1"
+        android:gravity="center"
+        android:paddingTop="@dimen/space_normal"
+        android:text="Самое"
+        android:textSize="@dimen/font_normal"
+        android:textAllCaps="true"/>
+
+    <me.smbduknow.theatrics.ui.misc.view.CalendarDateView
+        android:id="@+id/filter_"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:padding="@dimen/space_normal"
+        app:textDate="15"
+        app:textDay="gy"/>
+    <me.smbduknow.theatrics.ui.misc.view.CalendarDateView
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:padding="@dimen/space_normal"
+        app:textDate="15"
+        app:textDay="gy"/>
+    <me.smbduknow.theatrics.ui.misc.view.CalendarDateView
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:padding="@dimen/space_normal"
+        app:textDate="15"
+        app:textDay="gy"/>
+    <me.smbduknow.theatrics.ui.misc.view.CalendarDateView
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:padding="@dimen/space_normal"
+        app:textDate="15"
+        app:textDay="gy"/>
+    <me.smbduknow.theatrics.ui.misc.view.CalendarDateView
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:padding="@dimen/space_normal"
+        app:textDate="15"
+        app:textDay="gy"/>
+
+
+    <ImageButton
+        android:id="@+id/filter_more"
+        android:layout_width="?actionBarSize"
+        android:layout_height="match_parent"
         android:background="@color/transparent_white"
         android:gravity="center"
         android:padding="@dimen/space_normal"
-
         android:tint="@color/text_secondary"
         app:srcCompat="@drawable/ic_more_vert_black_24dp" />
 

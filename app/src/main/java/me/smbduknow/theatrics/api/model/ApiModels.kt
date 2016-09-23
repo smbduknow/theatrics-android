@@ -1,6 +1,7 @@
 package me.smbduknow.theatrics.api.model
 
-import com.squareup.moshi.Json
+import com.google.gson.annotations.SerializedName
+import java.util.*
 
 class ApiListResponse<T> (
         val previous : String,
@@ -17,15 +18,15 @@ open class ApiItem(
 
 open class ApiFeedItem(id: Long, type: String) : ApiItem(id, type) {
 
-    @Json(name = "name")
+    @SerializedName("name")
     var title: String = ""
-    @Json(name = "full_name")
+    @SerializedName("full_name")
     var fullTitle: String = ""
-    @Json(name = "lead")
+    @SerializedName("lead")
     var leadText: String = ""
-    @Json(name = "tagline")
+    @SerializedName("tagline")
     var tagline: String = ""
-    @Json(name = "is_premiere")
+    @SerializedName("is_premiere")
     var isPremiere: Boolean = false
 
     var description: String = ""
@@ -48,8 +49,8 @@ class ApiDetailItem(id: Long, type: String) : ApiFeedItem(id, type) {
 
 
 class ApiDate(
-        val start: String,
-        val end: String
+        val start: Date,
+        val end: Date
 )
 
 class ApiPrice(
@@ -63,7 +64,7 @@ class ApiImage(
         val thumbnails: ApiThumbnails
 ) {
     class ApiThumbnails(
-            @Json(name = "144x96") val small: String,
-            @Json(name = "640x384") val medium: String
+            @SerializedName("144x96") val small: String,
+            @SerializedName("640x384") val medium: String
     )
 }
