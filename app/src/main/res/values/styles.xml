@@ -132,11 +132,11 @@
     </style>
 
 
-
     <style name="AppTheme.CalendarItemDate">
         <item name="android:textColor">@color/text_secondary</item>
         <item name="android:textSize">@dimen/font_title</item>
     </style>
+
     <style name="AppTheme.CalendarItemDay">
         <item name="android:textColor">@color/text_secondary</item>
         <item name="android:textSize">@dimen/font_tiny</item>

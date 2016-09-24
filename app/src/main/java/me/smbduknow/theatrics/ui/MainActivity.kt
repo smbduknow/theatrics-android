@@ -15,6 +15,7 @@ import me.smbduknow.theatrics.preference.PreferenceHelper
 import me.smbduknow.theatrics.ui.base.BaseActivity
 import me.smbduknow.theatrics.ui.feed.FeedEventFragment
 import me.smbduknow.theatrics.ui.feed.adapter.CityArrayAdapter
+import me.smbduknow.theatrics.ui.misc.DatepickerDialog
 import me.smbduknow.theatrics.ui.model.UiCity
 
 class MainActivity : BaseActivity() {
@@ -26,6 +27,8 @@ class MainActivity : BaseActivity() {
     private val searchButton by lazy { search_btn }
 
     private val citySpinner by lazy { cities_spinner }
+
+    private val calendarBtn by lazy { calendar_btn }
 
     private var arrowDrawable: DrawerArrowDrawable? = null
 
@@ -81,6 +84,15 @@ class MainActivity : BaseActivity() {
             }
         }
 
+        calendarBtn.setOnClickListener {
+            val datepicker = DatepickerDialog()
+            datepicker.resultListener = { date ->
+                val feedFragment = supportFragmentManager.findFragmentById(R.id.content_main) as FeedEventFragment
+                feedFragment.date = date
+                feedFragment.refreshFeed()
+            }
+            datepicker.show(supportFragmentManager, "datepicker")
+        }
     }
 
     override fun onBackPressed() {

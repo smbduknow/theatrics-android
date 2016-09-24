@@ -16,10 +16,12 @@ import me.smbduknow.theatrics.ui.feed.adapter.EventsAdapter
 import me.smbduknow.theatrics.ui.misc.InfiniteScrollListener
 import me.smbduknow.theatrics.ui.misc.SpaceItemDecorator
 import me.smbduknow.theatrics.ui.misc.adapter.ViewModel
+import me.smbduknow.theatrics.ui.misc.format
 import me.smbduknow.theatrics.ui.misc.inflate
 import me.smbduknow.theatrics.ui.model.UiFeedView
 import me.smbduknow.theatrics.ui.model.UiLoader
 import me.smbduknow.theatrics.ui.model.ViewState
+import java.util.*
 
 class FeedEventFragment : BasePresenterFragment<IFeedPresenter, IFeedView>(), IFeedView {
 
@@ -33,6 +35,8 @@ class FeedEventFragment : BasePresenterFragment<IFeedPresenter, IFeedView>(), IF
     private var feedAdapter: EventsAdapter? = null
 
     private var state = UiFeedView(ViewState.STATE_LOADING, 0)
+
+    var date: Date? = null
 
     override fun onPresenterFactoryCreated() = object: PresenterFactory<IFeedPresenter> {
         override fun create() = FeedEventPresenter()
@@ -130,7 +134,7 @@ class FeedEventFragment : BasePresenterFragment<IFeedPresenter, IFeedView>(), IF
 
     fun refreshFeed() {
         val slug = PreferenceHelper.getUserCity()
-        presenter?.setParameters(if (slug.isNotEmpty()) slug else "msk" )
+        presenter?.setParameters(if (slug.isNotEmpty()) slug else "msk", date?.format("yyyy-MM-dd"))
         presenter?.requestNext(true)
     }
     fun loadNextPage() = presenter?.requestNext()
