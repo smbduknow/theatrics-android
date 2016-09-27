@@ -90,7 +90,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textColor="@color/text_primary"
-        android:textSize="@dimen/font_large"
+        android:textSize="@dimen/text_large"
         tools:text="Lead text" />
 
     <TextView

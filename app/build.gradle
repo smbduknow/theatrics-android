@@ -19,7 +19,7 @@ ext {
 }
 
 android {
-    compileSdkVersion 23
+    compileSdkVersion 24
     buildToolsVersion "24.0.2"
 
     defaultConfig {
@@ -27,7 +27,7 @@ android {
         versionCode buildVersionCode()
         versionName buildVersionName()
         minSdkVersion 16
-        targetSdkVersion 23
+        targetSdkVersion 24
 
         vectorDrawables.useSupportLibrary = true
     }
@@ -77,10 +77,10 @@ repositories {
 
 dependencies {
 
-    final supportLibraryVersion = '23.2.1'
+    final supportLibraryVersion = '24.2.1'
 
-    final ioOkhttpVersion = '3.2.0'
-    final ioRetrofitVersion = '2.0.2'
+    final ioOkhttpVersion = '3.4.1'
+    final ioRetrofitVersion = '2.1.0'
     final ioPicassoVersion = '2.5.2'
 
 

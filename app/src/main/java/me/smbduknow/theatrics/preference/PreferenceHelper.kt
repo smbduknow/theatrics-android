@@ -5,7 +5,6 @@ import android.content.SharedPreferences
 import android.preference.PreferenceManager
 import me.smbduknow.theatrics.BuildConfig
 
-
 object PreferenceHelper {
 
     private val PACKAGE_NAME = BuildConfig.APPLICATION_ID
