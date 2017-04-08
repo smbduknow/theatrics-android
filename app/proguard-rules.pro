@@ -44,3 +44,6 @@
 -dontwarn retrofit2.Platform$Java8
 -keepattributes Signature
 -keepattributes Exceptions
+
+-keep class okio.**
+-keep class java.nio.file.**
