@@ -116,5 +116,8 @@ dependencies {
     compile "io.reactivex:rxjava:$rxJavaVersion"
     compile "io.reactivex:rxandroid:$rxAndroidVersion"
 
+    //ui-third-party
+    compile "com.hannesdorfmann:adapterdelegates3:3.0.1"
+
     compile ('com.github.ozodrukh:CircularReveal:2.0.1@aar') { transitive = true; }
 }

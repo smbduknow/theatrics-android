@@ -1,10 +1,11 @@
 package me.smbduknow.theatrics.ui.model
 
-import me.smbduknow.theatrics.ui.misc.adapter.ViewModel
+import java.io.Serializable
 import java.util.*
 
+interface UiModel : Serializable
 
-class UiLoader : ViewModel
+class UiLoader : UiModel
 
 
 data class UiFeedEvent(
@@ -17,7 +18,7 @@ data class UiFeedEvent(
         val date: String,
         val month: String,
         val isPremiere: Boolean
-) : ViewModel
+) : UiModel
 
 data class UiDetailedEvent(
         val id: Long,
@@ -34,7 +35,7 @@ data class UiDetailedEvent(
         val dateExtra: String,
         val runningTime: String,
         val isPremiere: Boolean
-) : ViewModel
+) : UiModel
 
 
 object ViewState {
@@ -46,16 +47,16 @@ object ViewState {
 class UiFeedView (
         var state: Int,
         var listPage: Int,
-        var listItems: ArrayList<ViewModel> = ArrayList()
-) : ViewModel
+        var listItems: ArrayList<UiModel> = ArrayList()
+) : UiModel
 
 
 class UiDetailView(
         var state: Int,
         var detailItem: UiFeedEvent? = null
-) : ViewModel
+) : UiModel
 
 class UiCity(
         var slug: String,
         var title: String
-) : ViewModel
+) : UiModel

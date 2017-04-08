@@ -14,11 +14,11 @@ import me.smbduknow.theatrics.ui.detail.DetailActivity
 import me.smbduknow.theatrics.ui.feed.adapter.EventsAdapter
 import me.smbduknow.theatrics.ui.misc.InfiniteScrollListener
 import me.smbduknow.theatrics.ui.misc.SpaceItemDecorator
-import me.smbduknow.theatrics.ui.misc.adapter.ViewModel
 import me.smbduknow.theatrics.ui.misc.format
 import me.smbduknow.theatrics.ui.misc.inflate
 import me.smbduknow.theatrics.ui.model.UiFeedView
 import me.smbduknow.theatrics.ui.model.UiLoader
+import me.smbduknow.theatrics.ui.model.UiModel
 import me.smbduknow.theatrics.ui.model.ViewState
 import java.util.*
 
@@ -117,7 +117,7 @@ class FeedEventFragment : BasePresenterFragment<IFeedPresenter, IFeedView>(), IF
         throw UnsupportedOperationException("not implemented")
     }
 
-    override fun addItems(items: List<ViewModel>) {
+    override fun addItems(items: List<UiModel>) {
         if(feedAdapter?.getItems()?.isNotEmpty() ?: false ) {
             val loader = feedAdapter?.getItems()?.last() ?: null
             if(loader != null && loader is UiLoader) feedAdapter?.remove(feedAdapter!!.itemCount - 1)

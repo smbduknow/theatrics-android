@@ -2,7 +2,7 @@ package me.smbduknow.theatrics.ui.feed
 
 import me.smbduknow.mvpblueprint.mvp.MvpPresenter
 import me.smbduknow.mvpblueprint.mvp.MvpView
-import me.smbduknow.theatrics.ui.misc.adapter.ViewModel
+import me.smbduknow.theatrics.ui.model.UiModel
 
 interface IFeedPresenter : MvpPresenter<IFeedView> {
 
@@ -22,6 +22,6 @@ interface IFeedView : MvpView {
 
     fun showPageLoader(visible: Boolean = true)
 
-    fun addItems(items : List<ViewModel>)
+    fun addItems(items : List<UiModel>)
     fun clearItems()
 }

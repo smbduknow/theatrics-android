@@ -4,25 +4,26 @@ import android.support.v7.widget.RecyclerView
 import android.text.Html
 import android.view.View
 import android.view.ViewGroup
+import com.hannesdorfmann.adapterdelegates3.AdapterDelegate
 import kotlinx.android.synthetic.main.item_event.view.*
 import me.smbduknow.theatrics.R
-import me.smbduknow.theatrics.ui.misc.adapter.ViewModel
-import me.smbduknow.theatrics.ui.misc.adapter.ViewModelDelegateAdapter
 import me.smbduknow.theatrics.ui.misc.inflate
 import me.smbduknow.theatrics.ui.misc.loadImg
 import me.smbduknow.theatrics.ui.model.UiFeedEvent
+import me.smbduknow.theatrics.ui.model.UiModel
 
-class EventsDelegateAdapter : ViewModelDelegateAdapter {
+class EventItemAdapterDelegate : AdapterDelegate<ArrayList<UiModel>>() {
 
     var listener: (position: Int) -> Unit = {}
 
-    override fun isForViewType(item: ViewModel, position: Int) = item is UiFeedEvent
+    override fun isForViewType(items: ArrayList<UiModel>, position: Int) = items[position] is UiFeedEvent
 
     override fun onCreateViewHolder(parent: ViewGroup) = ViewHolder(parent)
 
-    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, item: ViewModel, position: Int) {
+    override fun onBindViewHolder(items: ArrayList<UiModel>, position: Int, holder: RecyclerView.ViewHolder, payloads: MutableList<Any>) {
+        val item = items[position] as UiFeedEvent
         holder as ViewHolder
-        holder.bind(item as UiFeedEvent, position, listener)
+        holder.bind(item, position, listener)
     }
 
     class ViewHolder(parent: ViewGroup) : RecyclerView.ViewHolder(parent.inflate(R.layout.item_event)) {
