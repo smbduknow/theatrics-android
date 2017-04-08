@@ -4,18 +4,35 @@ import me.smbduknow.theatrics.ui.misc.adapter.ViewModel
 import java.util.*
 
 
-class UiLoader() : ViewModel
+class UiLoader : ViewModel
 
 
-class UiFeedEvent(
+data class UiFeedEvent(
         val id: Long,
         val type: String,
         val title: String,
+        val image: String,
         val lead: String,
         val place: String,
         val date: String,
         val month: String,
+        val isPremiere: Boolean
+) : ViewModel
+
+data class UiDetailedEvent(
+        val id: Long,
+        val type: String,
+        val title: String,
         val image: String,
+        val lead: String,
+        val tagline: String,
+        val description: String,
+        val place: String,
+        val address: String,
+        val price: String,
+        val date: String,
+        val dateExtra: String,
+        val runningTime: String,
         val isPremiere: Boolean
 ) : ViewModel
 

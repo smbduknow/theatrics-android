@@ -11,7 +11,7 @@ class ApiListResponse<T> (
         val items : List<T>
 )
 
-open class ApiItem(
+abstract class ApiItem(
         val id: Long,
         val type: String
 )

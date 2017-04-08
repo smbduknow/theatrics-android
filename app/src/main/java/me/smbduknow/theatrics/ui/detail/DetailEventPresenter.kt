@@ -3,11 +3,11 @@ package me.smbduknow.theatrics.ui.detail
 import me.smbduknow.theatrics.BuildConfig
 import me.smbduknow.theatrics.api.ApiFactory
 import me.smbduknow.theatrics.api.model.ApiDate
-import me.smbduknow.theatrics.api.model.ApiDetailItem
 import me.smbduknow.theatrics.api.model.ApiFeedItem
 import me.smbduknow.theatrics.api.model.ApiPrice
 import me.smbduknow.theatrics.ui.base.BasePresenter
 import me.smbduknow.theatrics.ui.misc.format
+import me.smbduknow.theatrics.ui.model.UiDetailedEvent
 import me.smbduknow.theatrics.ui.model.UiFeedEvent
 import rx.android.schedulers.AndroidSchedulers
 import rx.schedulers.Schedulers
@@ -16,7 +16,23 @@ class DetailEventPresenter : BasePresenter<IDetailView>(), IDetailPresenter {
 
     override fun requestDetail(event: UiFeedEvent) {
         view?.showLoader()
-        subscription = ApiFactory.getApi().getEvent(event.id)
+        ApiFactory.getApi().getEvent(event.id)
+                .map { UiDetailedEvent(
+                        id= it.id,
+                        type= it.type,
+                        title = it.title,
+                        image = it.getTitleImage(),
+                        lead = it.leadText ,
+                        tagline = it.tagline ,
+                        description = it.description ,
+                        place = resolvePlaceName(it.place),
+                        address = resolveAddress(it.place),
+                        price = resolvePrice(it.price),
+                        date = resolveDeteString(it.dates),
+                        dateExtra = resolveDeteSubstring(it.dates),
+                        runningTime = resolveRunningTime(it.dates) ,
+                        isPremiere = it.isPremiere
+                )}
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(
@@ -25,20 +41,22 @@ class DetailEventPresenter : BasePresenter<IDetailView>(), IDetailPresenter {
                 )
     }
 
-    private fun handleResponse(item: ApiDetailItem) {
-        view?.setTitle(item.title)
-        view?.setImage(item.getTitleImage())
-        view?.setDetailedInfo(
-                item.tagline,
-                item.leadText,
-                item.description,
-                resolvePlaceName(item.place),
-                resolveAddress(item.place),
-                resolvePrice(item.price),
-                resolveDeteString(item.dates),
-                resolveDeteSubstring(item.dates),
-                resolveRunningTime(item.dates) )
-        view?.showDetail()
+    private fun handleResponse(item: UiDetailedEvent?) {
+        if(item != null) {
+            view?.setTitle(item.title)
+            view?.setImage(item.image)
+            view?.setDetailedInfo(
+                    item.tagline,
+                    item.lead,
+                    item.description,
+                    item.place,
+                    item.address,
+                    item.price,
+                    item.date,
+                    item.dateExtra,
+                    item.runningTime )
+            view?.showDetail()
+        }
     }
 
     private fun handleError(error: Throwable) {

@@ -33,7 +33,7 @@ class FeedEventPresenter : BasePresenter<IFeedView>(), IFeedPresenter {
             view?.clearItems()
             page = 1
         }
-        subscription = ApiFactory.getApi().getEvents(pLocation, pDate, 10, page)
+        ApiFactory.getApi().getEvents(pLocation, pDate, 10, page)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(
@@ -49,11 +49,11 @@ class FeedEventPresenter : BasePresenter<IFeedView>(), IFeedPresenter {
                     it.id,
                     it.type,
                     it.getTitleString(),
+                    it.getTitleImage(),
                     it.leadText,
                     it.place?.getTitleString() ?: "TBA",
                     it.dates[0].start.format("dd"),
                     it.dates[0].start.format("LLLL").substring(0..2),
-                    it.getTitleImage(),
                     it.isPremiere)
         })
         if(response.next.isNotEmpty()) view?.addItems(listOf(UiLoader()))
