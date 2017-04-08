@@ -7,10 +7,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import kotlinx.android.synthetic.main.fragment_feed.*
+import me.smbduknow.mvpblueprint.BasePresenterFragment
 import me.smbduknow.theatrics.R
 import me.smbduknow.theatrics.preference.PreferenceHelper
-import me.smbduknow.theatrics.ui.base.BasePresenterFragment
-import me.smbduknow.theatrics.ui.base.PresenterFactory
 import me.smbduknow.theatrics.ui.detail.DetailActivity
 import me.smbduknow.theatrics.ui.feed.adapter.EventsAdapter
 import me.smbduknow.theatrics.ui.misc.InfiniteScrollListener
@@ -25,6 +24,8 @@ import java.util.*
 
 class FeedEventFragment : BasePresenterFragment<IFeedPresenter, IFeedView>(), IFeedView {
 
+    override fun onCreatePresenter() = FeedEventPresenter()
+
     private val LAYOUT_RES = R.layout.fragment_feed
 
     private val feedLoader          by lazy { feed_loader }
@@ -37,10 +38,6 @@ class FeedEventFragment : BasePresenterFragment<IFeedPresenter, IFeedView>(), IF
     private var state = UiFeedView(ViewState.STATE_LOADING, 0)
 
     var date: Date? = null
-
-    override fun onPresenterFactoryCreated() = object: PresenterFactory<IFeedPresenter> {
-        override fun create() = FeedEventPresenter()
-    }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return container?.inflate(inflater, LAYOUT_RES)
@@ -63,6 +60,8 @@ class FeedEventFragment : BasePresenterFragment<IFeedPresenter, IFeedView>(), IF
             adapter = feedAdapter
         }
     }
+
+    override fun onPresenterReady() {}
 
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)

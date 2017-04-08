@@ -1,13 +1,13 @@
 package me.smbduknow.theatrics.ui.detail
 
 import android.os.Bundle
+import android.support.v7.app.AppCompatActivity
 import android.view.MenuItem
 import kotlinx.android.synthetic.main.activity_detail.*
 import me.smbduknow.theatrics.R
-import me.smbduknow.theatrics.ui.base.BaseActivity
 import me.smbduknow.theatrics.ui.misc.loadImg
 
-class DetailActivity : BaseActivity() {
+class DetailActivity : AppCompatActivity() {
 
     private val LAYOUT_RES = R.layout.activity_detail
 

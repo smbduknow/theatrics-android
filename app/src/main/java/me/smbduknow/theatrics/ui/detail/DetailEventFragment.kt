@@ -7,15 +7,16 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import kotlinx.android.synthetic.main.fragment_detail.*
+import me.smbduknow.mvpblueprint.BasePresenterFragment
 import me.smbduknow.theatrics.R
-import me.smbduknow.theatrics.ui.base.BasePresenterFragment
-import me.smbduknow.theatrics.ui.base.PresenterFactory
 import me.smbduknow.theatrics.ui.misc.inflate
 import me.smbduknow.theatrics.ui.model.UiDetailView
 import me.smbduknow.theatrics.ui.model.UiFeedEvent
 import me.smbduknow.theatrics.ui.model.ViewState
 
 class DetailEventFragment : BasePresenterFragment<IDetailPresenter, IDetailView>(), IDetailView {
+
+    override fun onCreatePresenter() = DetailEventPresenter()
 
     private val LAYOUT_RES = R.layout.fragment_detail
 
@@ -29,16 +30,11 @@ class DetailEventFragment : BasePresenterFragment<IDetailPresenter, IDetailView>
         }
     }
 
-    override fun onPresenterFactoryCreated() = object: PresenterFactory<IDetailPresenter> {
-        override fun create() = DetailEventPresenter()
-    }
-
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return container?.inflate(inflater, LAYOUT_RES)
     }
 
-    override fun onResume() {
-        super.onResume()
+    override fun onPresenterReady() {
         presenter?.requestDetail(arguments.getSerializable("event") as UiFeedEvent)
     }
 

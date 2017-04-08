@@ -3,6 +3,7 @@ package me.smbduknow.theatrics.ui
 import android.animation.Animator
 import android.animation.AnimatorListenerAdapter
 import android.os.Bundle
+import android.support.v7.app.AppCompatActivity
 import android.support.v7.graphics.drawable.DrawerArrowDrawable
 import android.support.v7.widget.Toolbar
 import android.view.View
@@ -12,13 +13,12 @@ import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.layout_menu.*
 import me.smbduknow.theatrics.R
 import me.smbduknow.theatrics.preference.PreferenceHelper
-import me.smbduknow.theatrics.ui.base.BaseActivity
 import me.smbduknow.theatrics.ui.feed.FeedEventFragment
 import me.smbduknow.theatrics.ui.feed.adapter.CityArrayAdapter
 import me.smbduknow.theatrics.ui.misc.DatepickerDialog
 import me.smbduknow.theatrics.ui.model.UiCity
 
-class MainActivity : BaseActivity() {
+class MainActivity : AppCompatActivity() {
 
     private val LAYOUT_RES = R.layout.activity_main
 

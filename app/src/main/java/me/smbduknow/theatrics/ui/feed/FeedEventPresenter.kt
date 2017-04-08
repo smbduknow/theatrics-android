@@ -1,10 +1,10 @@
 package me.smbduknow.theatrics.ui.feed
 
+import me.smbduknow.mvpblueprint.BasePresenter
 import me.smbduknow.theatrics.BuildConfig
 import me.smbduknow.theatrics.api.ApiFactory
 import me.smbduknow.theatrics.api.model.ApiFeedItem
 import me.smbduknow.theatrics.api.model.ApiListResponse
-import me.smbduknow.theatrics.ui.base.BasePresenter
 import me.smbduknow.theatrics.ui.misc.format
 import me.smbduknow.theatrics.ui.model.UiFeedEvent
 import me.smbduknow.theatrics.ui.model.UiLoader

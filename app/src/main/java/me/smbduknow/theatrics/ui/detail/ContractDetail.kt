@@ -1,7 +1,7 @@
 package me.smbduknow.theatrics.ui.detail
 
-import me.smbduknow.theatrics.ui.base.MvpPresenter
-import me.smbduknow.theatrics.ui.base.MvpView
+import me.smbduknow.mvpblueprint.mvp.MvpPresenter
+import me.smbduknow.mvpblueprint.mvp.MvpView
 import me.smbduknow.theatrics.ui.model.UiFeedEvent
 
 interface IDetailPresenter : MvpPresenter<IDetailView> {
