@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.graphics.drawable.DrawerArrowDrawable
 import android.support.v7.widget.Toolbar
+import android.util.Log
 import android.view.View
 import android.widget.AdapterView
 import io.codetail.animation.ViewAnimationUtils
@@ -15,7 +16,6 @@ import me.smbduknow.theatrics.R
 import me.smbduknow.theatrics.preference.PreferenceHelper
 import me.smbduknow.theatrics.ui.feed.FeedEventFragment
 import me.smbduknow.theatrics.ui.feed.adapter.CityArrayAdapter
-import me.smbduknow.theatrics.ui.misc.DatepickerDialog
 import me.smbduknow.theatrics.ui.model.UiCity
 
 class MainActivity : AppCompatActivity() {
@@ -28,7 +28,8 @@ class MainActivity : AppCompatActivity() {
 
     private val citySpinner by lazy { cities_spinner }
 
-    private val calendarBtn by lazy { calendar_btn }
+//    private val calendarBtn by lazy { calendar_btn }
+    private val datepicker by lazy { main_datepicker }
 
     private var arrowDrawable: DrawerArrowDrawable? = null
 
@@ -84,15 +85,23 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
-        calendarBtn.setOnClickListener {
-            val datepicker = DatepickerDialog()
-            datepicker.resultListener = { date ->
-                val feedFragment = supportFragmentManager.findFragmentById(R.id.content_main) as FeedEventFragment
-                feedFragment.date = date
-                feedFragment.refreshFeed()
-            }
-            datepicker.show(supportFragmentManager, "datepicker")
+        datepicker.onDateSelectListener = { date, index ->
+            Log.d("INDEX", index.toString())
+            val feedFragment = supportFragmentManager.findFragmentById(R.id.content_main) as FeedEventFragment
+            feedFragment.date = date
+            feedFragment.refreshFeed()
         }
+
+
+//        calendarBtn.setOnClickListener {
+//            val datepicker = DatepickerDialog()
+//            datepicker.resultListener = { date ->
+//                val feedFragment = supportFragmentManager.findFragmentById(R.id.content_main) as FeedEventFragment
+//                feedFragment.date = date
+//                feedFragment.refreshFeed()
+//            }
+//            datepicker.show(supportFragmentManager, "datepicker")
+//        }
     }
 
     override fun onBackPressed() {

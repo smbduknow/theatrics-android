@@ -33,7 +33,7 @@
                     android:tint="@color/text_primary"
                     app:srcCompat="@drawable/ic_menu_black_24dp" />
 
-                <me.smbduknow.theatrics.ui.misc.view.CompatTextView
+                <me.smbduknow.theatrics.ui.misc.widget.CompatTextView
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
@@ -59,6 +59,11 @@
 
         <!--<include layout="@layout/layout_appbar_datepicker"/>-->
 
+        <me.smbduknow.theatrics.ui.misc.widget.CalendarWeekView
+            android:id="@+id/main_datepicker"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
     </android.support.design.widget.AppBarLayout>
 
     <FrameLayout
@@ -71,8 +76,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginTop="?actionBarSize">
-
-        <!-- Put more views here if you want, it's stock frame layout  -->
         <FrameLayout
             android:id="@+id/main_menu"
             android:layout_width="match_parent"
@@ -80,19 +83,17 @@
             android:visibility="gone">
             <include layout="@layout/layout_menu" />
         </FrameLayout>
-
-
     </io.codetail.widget.RevealFrameLayout>
 
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/calendar_btn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="@dimen/space_large"
-        android:tint="@color/white"
-        app:backgroundTint="@color/text_primary"
-        app:srcCompat="@drawable/ic_calendar"
-        app:layout_anchor="@id/content_main"
-        app:layout_anchorGravity="bottom|right|end" />
+    <!--<android.support.design.widget.FloatingActionButton-->
+        <!--android:id="@+id/calendar_btn"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_margin="@dimen/space_large"-->
+        <!--android:tint="@color/white"-->
+        <!--app:backgroundTint="@color/text_primary"-->
+        <!--app:srcCompat="@drawable/ic_calendar"-->
+        <!--app:layout_anchor="@id/content_main"-->
+        <!--app:layout_anchorGravity="bottom|right|end" />-->
 
 </android.support.design.widget.CoordinatorLayout>

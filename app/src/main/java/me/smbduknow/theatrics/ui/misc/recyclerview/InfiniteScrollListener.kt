@@ -1,4 +1,4 @@
-package me.smbduknow.theatrics.ui.misc
+package me.smbduknow.theatrics.ui.misc.recyclerview
 
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView

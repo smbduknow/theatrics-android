@@ -1,5 +1,3 @@
-@file:JvmName("ExtensionsUtils")
-
 package me.smbduknow.theatrics.ui.misc
 
 import android.text.TextUtils

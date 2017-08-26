@@ -6,7 +6,7 @@
     android:orientation="horizontal">
 
 
-    <me.smbduknow.theatrics.ui.misc.view.CompatTextView
+    <me.smbduknow.theatrics.ui.misc.widget.CompatTextView
         android:id="@+id/filter_best"
         android:layout_width="0dp"
         android:layout_height="match_parent"
@@ -17,32 +17,32 @@
         android:textSize="@dimen/text_normal"
         android:textAllCaps="true"/>
 
-    <me.smbduknow.theatrics.ui.misc.view.CalendarDateView
+    <me.smbduknow.theatrics.ui.misc.widget.CalendarDateView
         android:id="@+id/filter_"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:padding="@dimen/space_normal"
         app:textDate="15"
         app:textDay="gy"/>
-    <me.smbduknow.theatrics.ui.misc.view.CalendarDateView
+    <me.smbduknow.theatrics.ui.misc.widget.CalendarDateView
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:padding="@dimen/space_normal"
         app:textDate="15"
         app:textDay="gy"/>
-    <me.smbduknow.theatrics.ui.misc.view.CalendarDateView
+    <me.smbduknow.theatrics.ui.misc.widget.CalendarDateView
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:padding="@dimen/space_normal"
         app:textDate="15"
         app:textDay="gy"/>
-    <me.smbduknow.theatrics.ui.misc.view.CalendarDateView
+    <me.smbduknow.theatrics.ui.misc.widget.CalendarDateView
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:padding="@dimen/space_normal"
         app:textDate="15"
         app:textDay="gy"/>
-    <me.smbduknow.theatrics.ui.misc.view.CalendarDateView
+    <me.smbduknow.theatrics.ui.misc.widget.CalendarDateView
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:padding="@dimen/space_normal"

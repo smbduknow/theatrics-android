@@ -56,7 +56,7 @@ class FeedEventPresenter : BasePresenter<IFeedView>(), IFeedPresenter {
                     it.dates[0].start.format("LLLL").substring(0..2),
                     it.isPremiere)
         })
-        if(response.next.isNotEmpty()) view?.addItems(listOf(UiLoader()))
+        if(!response.next.isNullOrEmpty()) view?.addItems(listOf(UiLoader()))
         view?.showFeed()
         page++
 

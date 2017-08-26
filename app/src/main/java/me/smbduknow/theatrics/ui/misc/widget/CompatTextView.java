@@ -1,4 +1,4 @@
-package me.smbduknow.theatrics.ui.misc.view;
+package me.smbduknow.theatrics.ui.misc.widget;
 
 import android.content.Context;
 import android.content.res.TypedArray;

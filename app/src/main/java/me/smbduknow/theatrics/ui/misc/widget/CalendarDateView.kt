@@ -1,6 +1,7 @@
-package me.smbduknow.theatrics.ui.misc.view
+package me.smbduknow.theatrics.ui.misc.widget
 
 import android.content.Context
+import android.support.v4.content.res.ResourcesCompat
 import android.util.AttributeSet
 import android.view.Gravity
 import android.view.ViewGroup
@@ -26,10 +27,13 @@ class CalendarDateView(
 
     init {
         orientation = VERTICAL
-        setGravity(Gravity.CENTER)
+        gravity = Gravity.CENTER
         isClickable = true
+        background = ResourcesCompat.getDrawable(resources, R.drawable.bg_day_selector, null)
+
         dateTextView = TextView(ctx, null, 0, R.style.AppTheme_CalendarItemDate)
         dayTextView = TextView(ctx, null, 0, R.style.AppTheme_CalendarItemDay)
+
         addView(dateTextView, ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT))
         val dayLp = LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT)
         dayLp.topMargin = ctx.resources.getDimensionPixelSize(R.dimen.space_negative_small)
@@ -37,20 +41,20 @@ class CalendarDateView(
 
         val a = context.obtainStyledAttributes(attrs, R.styleable.CalendarDateView)
 
-        val dateStr = a.getString(R.styleable.CalendarDateView_textDate)
-        val dayStr = a.getString(R.styleable.CalendarDateView_textDay)
+        val dateStr = a.getString(R.styleable.CalendarDateView_textDate) ?: ""
+        val dayStr = a.getString(R.styleable.CalendarDateView_textDay) ?: ""
 
         a.recycle()
 
         setTextDate(dateStr)
-        setTextDay(dayStr)
+        setTextWeekday(dayStr)
     }
 
     fun setTextDate(text: CharSequence) {
         dateTextView.text = text
     }
 
-    fun setTextDay(text: CharSequence) {
+    fun setTextWeekday(text: CharSequence) {
         dayTextView.text = text
     }
 }

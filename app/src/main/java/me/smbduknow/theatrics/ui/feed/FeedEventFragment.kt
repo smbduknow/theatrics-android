@@ -12,8 +12,8 @@ import me.smbduknow.theatrics.R
 import me.smbduknow.theatrics.preference.PreferenceHelper
 import me.smbduknow.theatrics.ui.detail.DetailActivity
 import me.smbduknow.theatrics.ui.feed.adapter.EventsAdapter
-import me.smbduknow.theatrics.ui.misc.InfiniteScrollListener
-import me.smbduknow.theatrics.ui.misc.SpaceItemDecorator
+import me.smbduknow.theatrics.ui.misc.recyclerview.InfiniteScrollListener
+import me.smbduknow.theatrics.ui.misc.recyclerview.SpaceItemDecorator
 import me.smbduknow.theatrics.ui.misc.format
 import me.smbduknow.theatrics.ui.misc.inflate
 import me.smbduknow.theatrics.ui.model.UiFeedView

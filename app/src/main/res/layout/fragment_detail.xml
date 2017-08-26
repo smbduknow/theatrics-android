@@ -8,7 +8,7 @@
     android:background="@color/white"
     android:orientation="vertical">
 
-    <me.smbduknow.theatrics.ui.misc.view.CompatTextView
+    <me.smbduknow.theatrics.ui.misc.widget.CompatTextView
         android:id="@+id/detail_title"
         style="@style/AppTheme.DetailTitle"
         android:layout_width="match_parent"
@@ -30,7 +30,7 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-        <me.smbduknow.theatrics.ui.misc.view.CompatTextView
+        <me.smbduknow.theatrics.ui.misc.widget.CompatTextView
             android:id="@+id/detail_place"
             style="@style/AppTheme.DetailMeta"
             android:layout_width="match_parent"
@@ -51,7 +51,7 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-        <me.smbduknow.theatrics.ui.misc.view.CompatTextView
+        <me.smbduknow.theatrics.ui.misc.widget.CompatTextView
             android:id="@+id/detail_date"
             style="@style/AppTheme.DetailMeta"
             android:layout_width="match_parent"
@@ -67,7 +67,7 @@
             tools:text="Monday, 19:00 - 21:25" />
     </LinearLayout>
 
-    <me.smbduknow.theatrics.ui.misc.view.CompatTextView
+    <me.smbduknow.theatrics.ui.misc.widget.CompatTextView
         android:id="@+id/detail_running_time"
         style="@style/AppTheme.DetailMeta"
         android:layout_width="match_parent"
@@ -75,7 +75,7 @@
         app:compatDrawableStart="@drawable/ic_time_24dp"
         tools:text="2 hr 3 min" />
 
-    <me.smbduknow.theatrics.ui.misc.view.CompatTextView
+    <me.smbduknow.theatrics.ui.misc.widget.CompatTextView
         android:id="@+id/detail_price"
         style="@style/AppTheme.DetailMeta"
         android:layout_width="match_parent"
